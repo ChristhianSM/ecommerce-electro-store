@@ -1,0 +1,87 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,h2,h3,body,label, p, button, div, input {
+    font-family: 'Barlow';
+}
+
+
+/* Modal */
+@layer utilities {
+
+    /* Estilos para el modal */
+    .custom {
+      position: absolute;
+      z-index: -1;
+    }
+    .overlay {
+        background: rgba(0, 0, 0, 0.5);
+        /* padding: 40px; */
+        display: flex;
+        justify-content: flex-end;
+        align-items: baseline;
+    }
+    
+    .contenedor-modal {
+        width: 500px;
+        height: 100vh;
+        background-color: white;
+        position: relative;
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 8px;
+        padding: 10px;
+        padding-right : 20px;
+    }
+    
+    .encabezado {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e83838;
+    }
+    
+    .encabezado h3 {
+        font-weight: 500;
+        font-size: 18px;
+    }
+    
+    .cerrar {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        height: 30px;
+        width: 30px;
+        background-color: none;
+        cursor: pointer;
+        transition: 0.3s ease all;
+        border-radius: 5px;
+        color: #1766dc;
+    }
+    .cerrar:hover {
+        background: #f2f2f2;
+    }
+
+    /* Estilos para el mensaje de error */
+    .error {
+        font-size: 0.75rem/* 12px */;
+        line-height: 1rem/* 16px */;
+        color : rgb(239, 68, 68);
+        text-align: right;
+        padding-right: 0.5rem
+    }
+
+    .errorInput {
+        border: 1px solid red;
+    }
+
+    .errorInput::placeholder {
+        color : red;
+    }
+  }
+  
