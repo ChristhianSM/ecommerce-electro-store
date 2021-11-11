@@ -145,6 +145,13 @@ const ProductState = ({children}) => {
         })
     }
 
+    const clearShoppingCart = () => {
+        dispatch({
+            type: types.shoppingCartClear,
+        })
+    }
+
+
     return (
         <ProductContext.Provider
             value = {{
@@ -165,6 +172,7 @@ const ProductState = ({children}) => {
                 addProductShoppingCart,
                 updateAmountShoppingCart,
                 removeProductShoppingCart,
+                clearShoppingCart,
 
                 // addOrDeleteProductFavorite,
             }}

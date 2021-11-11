@@ -86,6 +86,12 @@ export const productReducer = (state, action) =>{
                 ...state,
                 shoppingCart : state.shoppingCart.filter( product => product.id !== action.payload)
             }
+
+        case types.shoppingCartClear:
+            return {
+                ...state,
+                shoppingCart : []
+            }
     
         default:
             return {

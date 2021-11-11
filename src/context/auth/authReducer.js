@@ -33,6 +33,12 @@ export const authReducer = (state, action) => {
                 ...state,
                 favoritesProducts : state.favoritesProducts.filter( product => product.id !== action.payload.id),
             }
+
+        case types.saveOrder:
+            return {
+                ...state,
+                orders : [action.payload, ...state.orders]
+            }
     
         default:
             return state;

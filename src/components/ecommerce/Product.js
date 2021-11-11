@@ -134,6 +134,15 @@ export const Product = ({product}) => {
                     </div>
                     </div>
                 </div>
+                {
+                    isOpen &&
+                    <div className = "w-screen h-screen bg-black fixed top-0 left-0 flex justify-center items-center bg-opacity-70 z-10">
+                        <div className = "w-1/3 h-1/3 animate__animated animate__bounceIn relative bg-white" >
+                            <img src={thumbnail} alt="" className = "object-contain" />
+                        </div>
+                    </div>
+                }
+                <div></div>
             </div>
         </>
         

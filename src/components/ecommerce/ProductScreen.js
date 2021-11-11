@@ -6,7 +6,7 @@ export const ProductScreen = () => {
     return (
         <>
             <NavBar />
-            <section className = "mx-auto max-w-4xl container ">
+            <section className = "mx-auto max-w-4xl container mt-48">
                 <div className = "flex mt-10 gap-10">
                     <div className = "w-1/2">
                         <img src="http://http2.mlstatic.com/D_726803-MPE32940503067_112019-O.jpg" alt="" className = "m-auto object-contain"/>

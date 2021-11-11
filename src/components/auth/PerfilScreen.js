@@ -7,6 +7,7 @@ import { PerfilData } from './PerfilData'
 import { PerfilPassword } from './PerfilPassword'
 import { PerfilFavorites } from './PerfilFavorites'
 import { PerfilContacts } from './PerfilContacts'
+import { PerfilOrders } from './PerfilOrders'
 
 export const PerfilScreen = () => {
 
@@ -15,13 +16,14 @@ export const PerfilScreen = () => {
         perfilData : true,
         perfilPassword : false, 
         perfilFavorites : false,
+        perfilOrders : false,
         perfilContacts : false,
     })
 
     return (
         <>
             <NavBar />
-            <div className = "container mx-auto my-5 custom right-0 left-0">
+            <div className = "container mx-auto my-5 custom right-0 left-0 mt-48">
                 <div className="border shadow-lg p-5 flex items-center animate__animated animate__fadeIn">
                     <FaRegUserCircle className = "text-7xl font-semibold"></FaRegUserCircle>
                     <div className = "ml-5 text-2xl">
@@ -48,6 +50,10 @@ export const PerfilScreen = () => {
                     {
                         stateComponent.perfilContacts && 
                         <PerfilContacts />
+                    }  
+                    {
+                        stateComponent.perfilOrders && 
+                        <PerfilOrders />
                     }  
                 </div>
             </div>

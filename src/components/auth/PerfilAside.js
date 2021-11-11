@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaRegUser} from 'react-icons/fa'
+import {FaRegUser, FaClipboardList} from 'react-icons/fa'
 import {RiLockPasswordLine} from 'react-icons/ri'
 import {MdFavorite} from 'react-icons/md'
 import {IoMdContacts} from 'react-icons/io'
@@ -51,6 +51,23 @@ export const PerfilAside = ({setStateComponent, stateComponent}) => {
                 <MdFavorite className = "mr-2 text-2xl"></MdFavorite>
                 Favoritos</button>
 
+            <button 
+                className = {`border bg-white w-full p-5 shadow-xl mb-2 flex items-center justify-center text-xl ${stateComponent.perfilOrders && 'bg-purple-600 text-white'}`}
+                onClick = {
+                    () => {
+                        setStateComponent({
+                            perfilData : false,
+                            perfilPassword : false, 
+                            perfilFavorites : false,
+                            perfilOrders : true,
+                            perfilContacts : false,
+                        })
+                    }
+                }
+                
+            >
+                <FaClipboardList className = "mr-2 text-2xl"></FaClipboardList>
+                Mis Ordenes</button>
             <button 
                 className = {`border bg-white w-full p-5 shadow-xl mb-2 flex items-center justify-center text-xl ${stateComponent.perfilContacts && 'bg-purple-600 text-white'}`}
                 onClick = {

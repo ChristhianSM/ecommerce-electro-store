@@ -9,10 +9,20 @@ import AuthContext from '../../context/auth/AuthContext'
 import PaymentContext from '../../context/payment/PaymentContext'
 import { totalToPayInCoutas } from '../../helpers/functions'
 import { Link } from 'react-router-dom'
-import { Modal } from 'bootstrap'
-import Button from '@restart/ui/esm/Button'
+import { ModalPayment } from '../ui/modals/Modal'
 
 export const FormPayment = ({setStatePasos , setStateComponent}) => {
+
+    // Modal
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggleModal() {
+        setIsOpen(!isOpen);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     const {state:stateAuth} = useContext(AuthContext);
     const {state:statePayment, setDataUserPayment} = useContext(PaymentContext);
@@ -42,19 +52,25 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
             cvc : Yup.string().required().max(3),
         }),
         onSubmit : (formData) => {
-            console.log(formData);
-            setDataUserPayment(formData);
-            
-            setStatePasos({
-                shoppingCart : true,
-                payment : true,
-                confirmation: true,
-            })
-            setStateComponent({
-                componentShoppingCart : false,
-                componentPayment : false,
-                componentConfirmation : true,
-            })
+            setIsOpen(true);
+            setTimeout(() => {
+                setDataUserPayment(formData);
+                
+                setStatePasos({
+                    shoppingCart : true,
+                    payment : true,
+                    confirmation: true,
+                })
+                setStateComponent({
+                    componentShoppingCart : false,
+                    componentPayment : false,
+                    componentConfirmation : true,
+                })
+            }, 5300);
+
+            setTimeout(() => {
+                setIsOpen(false);
+            }, 5000);
         }
     })
     return (
@@ -277,6 +293,9 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
                     <button 
                         type = "submit"
                         className = "border flex gap-2 items-center border-purple-500 p-2 rounded-lg text-white font-semibold bg-purple-500 hover:bg-purple-600"
+                        onClick = {() => {
+                            
+                        }}
                     >
                         Confirmar y pagar
                         <BsCheckLg></BsCheckLg>
@@ -285,6 +304,10 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
                 </form>
                 <div>       
             </div>
+            {
+                isOpen && <ModalPayment />
+            }
+            
         </>
     )
 }

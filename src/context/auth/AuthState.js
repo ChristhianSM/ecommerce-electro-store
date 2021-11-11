@@ -6,7 +6,6 @@ import { types } from "../../types/types"
 import AuthContext from "./AuthContext"
 import { authReducer } from "./authReducer"
 import { alertAddFavoriteProduct, alertErrorSignIn, alertPassword, alertSuccessSignIn } from "../../helpers/alerts"
-import { uiReducer } from "../loading/uiReducer"
 
 const AuthState = ({children}) => {
     const initialState = {
@@ -18,10 +17,7 @@ const AuthState = ({children}) => {
         celphone : '', 
         document : '',
         favoritesProducts : [],
-    }
-
-    const initialStateUi = {
-        loading : true,
+        orders : [],
     }
 
     const [state, dispatch] = useReducer(authReducer, initialState);
@@ -89,6 +85,7 @@ const AuthState = ({children}) => {
                     email, 
                     password,
                     favoritesProducts : [],
+                    orders: [],
                 })
                 alertSuccessSignIn('successfully registered user');
                 
@@ -129,7 +126,7 @@ const AuthState = ({children}) => {
             payload : updateUser
         })
 
-        // Actualizamos la base de datos con la password nueva
+        // Actualizamos la base de datos con la data nueva
         let usuarioActualizado = db.collection("USERS").doc(user.uid);
 
         return usuarioActualizado.update({
@@ -147,7 +144,6 @@ const AuthState = ({children}) => {
     // Cambiar de contraseña del usuario
     const updatePasswordUser = (newPassword) => {
         const user = auth.currentUser;
-        console.log(user);
 
         user.updatePassword(newPassword).then(() => {
             console.log("Se Actualizo con exito");
@@ -204,6 +200,31 @@ const AuthState = ({children}) => {
         // console.log(state.favoritesProducts);
     }
 
+    const saveOrder = (order) => {
+
+        dispatch({
+            type: types.saveOrder,
+            payload : order
+        })
+
+        const user = auth.currentUser;
+
+        // Actualizamos la base de datos con la data nueva
+        let usuarioActualizado = db.collection("USERS").doc(user.uid);
+
+        return usuarioActualizado.update({
+            ...state,
+            orders: [order,...state.orders]
+        })
+        .then(() => {
+            console.log("Se actualizo correctamente");
+        })
+        .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        })
+    }
+
     const startLogout = () => {
         auth.signOut()
             .then( () => {
@@ -239,6 +260,7 @@ const AuthState = ({children}) => {
                 updatePasswordUser,
                 addOrDeleteProductFavorite,
                 saveProductsFavoritesFirebase,
+                saveOrder,
                 startLogout,
                 login
             }}

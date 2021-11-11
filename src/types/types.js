@@ -6,6 +6,8 @@ export const types = {
     // Favorites Products
     favoriteProductAdd : "[Favorite Product] Add favorite Product",
     favoriteProductDelete : "[Favorite Product] Delete favorite Product",
+    // Orders
+    saveOrder : "[Order] Save order",
 
     loadProduct : "[Product] Load Products",
     loadFeaturedProducts : "[Product] Load Featured Products",
@@ -23,6 +25,7 @@ export const types = {
     shoppingCartUpdateAmountProduct : "[Shopping Cart] Update Amount Product Shopping Cart",
     shoppingCartIncrementOrDecrementAmountProduct : "[Shopping Cart] Update Increment or Decrement amount Product Shopping Cart",
     shoppingCartRemoveProduct : "[Shopping Cart] Remove Product Shopping Cart",
+    shoppingCartClear : "[Shopping Cart] Clear Shopping Cart",
 
     // Payment
     paymentSetDataInitial : "[Payment] Set Data Initial",
