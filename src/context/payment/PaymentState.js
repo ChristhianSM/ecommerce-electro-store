@@ -1,6 +1,5 @@
 import { useReducer } from "react";
 import { types } from "../../types/types";
-import { uiReducer } from "../loading/uiReducer";
 import PaymentContext from "./PaymentContext";
 import { paymentReducer } from "./paymentReducer";
 
@@ -24,9 +23,6 @@ const PaymentState = ({children}) => {
         totalForcouponDiscount: 0,
         totalForShippingType: 0,
         back:0,
-        loading : false,
-    }
-    const initialStateLoading = {
         loading : false,
     }
 

@@ -3,10 +3,11 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import AuthContext from '../../context/auth/AuthContext'
 import { alertPassword } from '../../helpers/alerts'
+import { SpinnerCircularFixed } from 'spinners-react'
 
 export const PerfilPassword = () => {
 
-    const {state:{password},updatePasswordUser} = useContext(AuthContext);
+    const {state, state:{password},updatePasswordUser} = useContext(AuthContext);
 
     const formik = useFormik({
         initialValues : {
@@ -89,17 +90,23 @@ export const PerfilPassword = () => {
                         <div className = "flex justify-around pt-6">
                             <button 
                                 type = "button"
-                                className = "w-40 text-center border border-black p-2 rounded-lg outline-none"
+                                className = "w-40 text-center border border-purple-600 text-purple-500 p-2 rounded-lg outline-none hover:bg-purple-600 hover:text-white"
                                 onClick = { () => {
                                     formik.resetForm()
                                 }}
                             >Limpiar</button>
                             <button 
                                 type = "submit"
-                                className = "w-40 text-center border border-black p-2 rounded-lg outline-none"
-                            >Change Password</button>
+                                className = "w-40 text-center border text-white p-2 rounded-lg outline-none bg-purple-500 hover:bg-purple-600"
+                            >Cambiar Contraseña</button>
                         </div>
                     </form>
+                    {
+                        state.loading &&
+                        <div className = "w-full h-full fixed top-0 left-0 bg-black bg-opacity-30 flex items-center justify-center p-16">
+                           <SpinnerCircularFixed size={70} thickness={100} speed={100} color="rgba(124, 58, 237, 1)" secondaryColor="rgba(0, 0, 0, 0.44)" />
+                        </div>        
+                    }
                 </div>
             </div>
         </div>

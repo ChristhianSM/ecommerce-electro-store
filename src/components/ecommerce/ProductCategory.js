@@ -13,7 +13,7 @@ export const ProductCategory = () => {
 
     return (
         <div className="container mx-auto border p-2 rounded-lg bg-gray-300 col-span-3 animate__animated animate__fadeInRight">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
                 {
                     state.filteredProductsForFilters.length === 0 
                     ?

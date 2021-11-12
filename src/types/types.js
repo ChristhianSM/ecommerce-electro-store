@@ -8,6 +8,7 @@ export const types = {
     favoriteProductDelete : "[Favorite Product] Delete favorite Product",
     // Orders
     saveOrder : "[Order] Save order",
+    setActiveOrder : "[Order] Set Active order",
 
     loadProduct : "[Product] Load Products",
     loadFeaturedProducts : "[Product] Load Featured Products",

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import {GoSettings} from 'react-icons/go'
 import ProductContext from '../../context/product/ProductContext';
-import { orderMaximunPrice } from '../../helpers/functions';
 
 export const Aside = ({category}) => {
 

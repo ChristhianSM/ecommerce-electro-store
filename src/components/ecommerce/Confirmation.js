@@ -3,17 +3,13 @@ import {AiFillLock} from 'react-icons/ai'
 import PaymentContext from '../../context/payment/PaymentContext'
 import { ModalConfirmation } from '../ui/modals/ModalConfirmation';
 
-export const Confirmation = ({shoppingCart,total}) => {
+export const Confirmation = ({shoppingCart}) => {
 
     const {state:statePayment} = useContext(PaymentContext);
 
      // Modal
      const [isOpen, setIsOpen] = useState(false);
 
-     function toggleModal() {
-         setIsOpen(!isOpen);
-     }
- 
     return (
         <div className="flex my-10 gap-2 justify-center">
             <div className = "w-7/12  px-5 py-10 bg-gray-100 animate__animated animate__fadeInLeft">

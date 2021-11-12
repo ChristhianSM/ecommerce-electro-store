@@ -39,6 +39,25 @@ export const authReducer = (state, action) => {
                 ...state,
                 orders : [action.payload, ...state.orders]
             }
+        case types.setActiveOrder:
+            return {
+                ...state,
+                activeOrder : action.payload
+            }
+
+        case types.uiStartLoading:
+            console.log("Iniciando");
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case types.uiFinishLoading:
+            console.log("Terminando");
+            return {
+                ...state,
+                loading: false
+            }
     
         default:
             return state;

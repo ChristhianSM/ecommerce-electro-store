@@ -7,7 +7,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { NavBarAuth } from '../ui/NavBarAuth'
 import AuthContext from '../../context/auth/AuthContext'
 import UiContext from '../../context/loading/UiContext';
-import { SpinnerCircular, SpinnerDotted } from 'spinners-react';
+import { SpinnerDotted } from 'spinners-react';
 
 export const LoginScreen = () => {
 

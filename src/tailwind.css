@@ -83,5 +83,9 @@ h1,h2,h3,body,label, p, button, div, input {
     .errorInput::placeholder {
         color : red;
     }
+
+    .z-index {
+        z-index: -1;
+    }
   }
   

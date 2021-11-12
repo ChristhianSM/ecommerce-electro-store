@@ -20,7 +20,6 @@ export const PerfilFavorites = ({favoritesProducts}) => {
         <div className="w-full bg-grey-lightest col-span-3 animate__animated animate__fadeInRight">
             <div className="container mx-auto">
                 <div className="mx-auto bg-white rounded shadow-lg border">
-
                     {
                         favoritesProducts.length > 0 
                         ?

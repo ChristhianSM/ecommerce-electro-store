@@ -15,15 +15,7 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
 
     // Modal
     const [isOpen, setIsOpen] = useState(false);
-
-    function toggleModal() {
-        setIsOpen(!isOpen);
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-
+    
     const {state:stateAuth} = useContext(AuthContext);
     const {state:statePayment, setDataUserPayment} = useContext(PaymentContext);
 
@@ -35,8 +27,7 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
             celphone : '',
             email : stateAuth.email,
             address: '',
-            couta : '',
-
+            couta : "1",
             cardNumber : '',
             dateExpire : '',
             cvc : ''
@@ -47,6 +38,7 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
             email : Yup.string().email().required(),
             celphone : Yup.string().matches(phoneRegExp, 'Numero de celular es invalido').required(),
             address : Yup.string().required(),
+            couta : Yup.string().required(),
             cardNumber : Yup.string().required(),
             dateExpire : Yup.date().required(),
             cvc : Yup.string().required().max(3),
@@ -159,6 +151,7 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
                                     className = "mr-3"
                                     value = {1}
                                     onChange = {formik.handleChange}
+                                    checked = {formik.values.couta === '1' ? true : false}
                                 />
                                 <label htmlFor="cuota1" className = "cursor-pointer">1 Cuota de S/. {statePayment.total}</label>
                             </div>
@@ -172,8 +165,8 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
                                     onChange = {formik.handleChange}
                                 />
                                 <label htmlFor="cuota3" className = "cursor-pointer">
-                                        3 Cuotas de S/. {(totalToPayInCoutas(statePayment.total, "3")/3).toFixed(2) }  
-                                        (Int.: 8%) Total: S/. {totalToPayInCoutas(statePayment.total, "3")}
+                                        3 Cuotas de S/. {totalToPayInCoutas(statePayment.total, "3").totalForCouta }  
+                                        (Int.: 8%) Total: S/. {totalToPayInCoutas(statePayment.total, "3").total}
                                 </label>
                             </div>
                             <div className = "mb-1">
@@ -186,7 +179,7 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
                                     onChange = {formik.handleChange}
                                 />
                                 <label htmlFor="cuota4" className = "cursor-pointer">
-                                    6 Cuotas de S/. {(totalToPayInCoutas(statePayment.total, "6")/6).toFixed(2)}  (Int.:12%) Total: S/. {totalToPayInCoutas(statePayment.total, "6")} 
+                                    6 Cuotas de S/. {totalToPayInCoutas(statePayment.total, "6").totalForCouta}  (Int.:12%) Total: S/. {totalToPayInCoutas(statePayment.total, "6").total} 
                                 </label>
                             </div>
                             <div className = "mb-1">
@@ -199,7 +192,7 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
                                     onChange = {formik.handleChange}
                                 />
                                 <label htmlFor="cuota5" className = "cursor-pointer">
-                                    12 Cuotas de S/. {(totalToPayInCoutas(statePayment.total, "12")/12).toFixed(2)}  (Int.: 20%) Total: S/. {totalToPayInCoutas(statePayment.total, "12")} 
+                                    12 Cuotas de S/. {totalToPayInCoutas(statePayment.total, "12").totalForCouta}  (Int.: 20%) Total: S/. {totalToPayInCoutas(statePayment.total, "12").total} 
                                 </label>
                             </div>
                             <div className = "mb-1">
@@ -212,7 +205,7 @@ export const FormPayment = ({setStatePasos , setStateComponent}) => {
                                     onChange = {formik.handleChange}
                                 />
                                 <label htmlFor="cuota6" className = "cursor-pointer">
-                                    18 Cuotas de S/. {(totalToPayInCoutas(statePayment.total, "18")/18).toFixed(2)}  (Int.: 30%) Total: S/. {totalToPayInCoutas(statePayment.total, "18")} 
+                                    18 Cuotas de S/. {totalToPayInCoutas(statePayment.total, "18").totalForCouta}  (Int.: 30%) Total: S/. {totalToPayInCoutas(statePayment.total, "18").total} 
                                 </label>
                             </div>
                         </div>

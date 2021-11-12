@@ -31,7 +31,7 @@ export const NavBar = () => {
     }
 
     return (
-        <nav className = "bg-black fixed w-full top-0 z-0">
+        <nav className = "bg-black fixed w-full top-0">
             <div className="container mx-auto max-w-7xl py-2 flex justify-between items-center text-white">
                 <Link to = "/"> 
                     <div className="logo h-14 animate__animated animate__fadeInDown">

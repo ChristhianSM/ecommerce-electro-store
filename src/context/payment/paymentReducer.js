@@ -35,14 +35,12 @@ export const paymentReducer = (state, action) => {
             }
 
         case types.uiStartLoading:
-            console.log("Iniciando");
             return {
                 ...state,
                 loading: true,
             }
 
         case types.uiFinishLoading:
-            console.log("Terminando");
             return {
                 ...state,
                 loading: false

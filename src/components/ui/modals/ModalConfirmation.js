@@ -12,21 +12,21 @@ export const ModalConfirmation = () => {
     const {state: statePayment} = useContext(PaymentContext);
     const {state:stateProduct,clearShoppingCart } = useContext(ProductContext);
 
-    const {total, typeShipping} = statePayment;
+    const {total, typeShipping, subtotal, couponDiscount} = statePayment;
 
     const idOrder = uuidv4();
     let date = new Date();
     date = dayjs(date).format('DD/MM/YYYY   HH:mm:ss')
 
-    console.log(date);
     const order = {
         idOrder,
         products: stateProduct.shoppingCart,
         total,
+        subtotal,
         typeShipping,
-        date
+        date,
+        couponDiscount
     }
-    
     useEffect(() => {
         saveOrder(order);
     }, [])

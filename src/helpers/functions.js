@@ -8,15 +8,27 @@ export const getTotalAmount = (products) => {
 export const totalToPayInCoutas = (total, numCoutas) => {
     switch (numCoutas) {
         case "3":
-            return  (total + total*0.08).toFixed(2);
+            return  {
+                total : (total + total*0.08).toFixed(2),
+                totalForCouta : ((total + total*0.08)/3).toFixed(2)
+            };
         case "6":
-            return (total + total*0.12).toFixed(2);
+            return  {
+                total : (total + total*0.12).toFixed(2),
+                totalForCouta : ((total + total*0.12)/6).toFixed(2)
+            };
 
         case "12":
-            return (total + total*0.2).toFixed(2);
+            return  {
+                total : (total + total*0.2).toFixed(2),
+                totalForCouta : ((total + total*0.2)/12).toFixed(2)
+            };
 
         case "18":
-            return  (total + total*0.3).toFixed(2);
+            return  {
+                total : (total + total*0.3).toFixed(2),
+                totalForCouta : ((total + total*0.3)/12).toFixed(2)
+            };
         default:
             break;
     }

@@ -1,11 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import AuthContext from '../../context/auth/AuthContext';
 import { useFormik} from 'formik'
 import * as Yup from 'yup'
+import { SpinnerCircularFixed } from 'spinners-react';
 
 export const PerfilData = () => {
     
     const {state, updateDataUser} = useContext(AuthContext);
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const formik = useFormik({
         initialValues : {
@@ -22,8 +25,8 @@ export const PerfilData = () => {
         }),
         onSubmit : (values) => {
             if (values.name !== state.name || values.lastName !== state.lastName || values.celphone !== state.celphone || values.document !== state.document) {
-                updateDataUser(values)
-            }   
+                updateDataUser(values);
+            }
         },
     })
     
@@ -42,7 +45,7 @@ export const PerfilData = () => {
                                 <div className="w-1/2 mr-1">
                                     <label 
                                         className={`block text-grey-darker text-sm font-bold mb-2 ${formik.touched.name && formik.errors.name && 'text-red-500'}`} 
-                                        htmlFor="first_name">First Name</label>
+                                        htmlFor="first_name">Nombres</label>
                                     <input 
                                         className={`appearance-none border rounded w-full py-2 px-3 text-grey-darker outline-none ${formik.touched.name && formik.errors.name && 'errorInput'}`}
                                         name="name" 
@@ -58,7 +61,7 @@ export const PerfilData = () => {
                                 <div className="w-1/2 ml-1">
                                     <label 
                                         className={`block text-grey-darker text-sm font-bold mb-2 ${formik.touched.lastName && formik.errors.lastName && 'text-red-500'}`} 
-                                        htmlFor="last_name">Last Name</label>
+                                        htmlFor="last_name">Apellidos</label>
                                     <input 
                                         className={`appearance-none border rounded w-full py-2 px-3 text-grey-darker outline-none ${formik.touched.lastName && formik.errors.lastName && 'errorInput'}`} 
                                         name="lastName" 
@@ -72,7 +75,7 @@ export const PerfilData = () => {
                                 </div>
                             </div>
                             <div className="mb-4">
-                                <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="email">Email Address</label>
+                                <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="email">Correo Electronico</label>
                                 <input 
                                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker outline-none" 
                                     disabled 
@@ -125,10 +128,16 @@ export const PerfilData = () => {
                                 </div>
                             </div>
                             <div className = "flex justify-around pt-6">
-                                <button className = "w-40 text-center border border-black p-2 rounded-lg outline-none " type = "button">Cancel</button>
-                                <button className = "w-40 text-center border border-black p-2 rounded-lg outline-none " type = "submit">update data</button>
+                                <button className = "w-40 text-center border border-purple-600 text-purple-500 p-2 rounded-lg outline-none hover:bg-purple-600 hover:text-white" type = "button">Cancel</button>
+                                <button className = {`w-40 text-center border text-white p-2 rounded-lg outline-none bg-purple-500 hover:bg-purple-600 ${state.loading && 'cursor-not-allowed'}`} type = "submit">Actualizar Datos</button>
                             </div>
-                    </form>              
+                    </form>
+                    {
+                        state.loading &&
+                        <div className = "w-full h-full fixed top-0 left-0 bg-black bg-opacity-30 flex items-center justify-center p-16">
+                           <SpinnerCircularFixed size={70} thickness={100} speed={100} color="rgba(124, 58, 237, 1)" secondaryColor="rgba(0, 0, 0, 0.44)" />
+                        </div>        
+                    }
                 </div>
             </div>
         </div>

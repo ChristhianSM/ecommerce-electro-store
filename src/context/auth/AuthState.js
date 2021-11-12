@@ -18,6 +18,8 @@ const AuthState = ({children}) => {
         document : '',
         favoritesProducts : [],
         orders : [],
+        activeOrder: null,
+        loading: false,
     }
 
     const [state, dispatch] = useReducer(authReducer, initialState);
@@ -114,6 +116,9 @@ const AuthState = ({children}) => {
 
     // Actualizamos los datos del usuario actual 
     const updateDataUser = (dataUser) => {
+        dispatch({
+            type:types.uiStartLoading
+        })
         const user = auth.currentUser;
 
         // Creamosun objeto con los datos actualizados del usuario
@@ -121,60 +126,76 @@ const AuthState = ({children}) => {
             ...state,
             ...dataUser
         }
-        dispatch({
-            type : types.dataUser, 
-            payload : updateUser
-        })
 
-        // Actualizamos la base de datos con la data nueva
-        let usuarioActualizado = db.collection("USERS").doc(user.uid);
-
-        return usuarioActualizado.update({
-            ...dataUser
-        })
-        .then(() => {
-            alertPassword("Data User Updated Correctly", 'bottom-end', 'success');
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        })
+        setTimeout(() => {
+            dispatch({
+                type : types.dataUser, 
+                payload : updateUser
+            })
+    
+            // Actualizamos la base de datos con la data nueva
+            let usuarioActualizado = db.collection("USERS").doc(user.uid);
+    
+            return usuarioActualizado.update({
+                ...dataUser
+            })
+            .then(() => {
+                alertPassword("Data User Updated Correctly", 'bottom-end', 'success');
+                dispatch({
+                    type:types.uiFinishLoading
+                })
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            })   
+        }, 3000);
     }
 
     // Cambiar de contraseña del usuario
     const updatePasswordUser = (newPassword) => {
         const user = auth.currentUser;
 
-        user.updatePassword(newPassword).then(() => {
-            console.log("Se Actualizo con exito");
+        // Ponemos el loading en true para simular una carga
+        dispatch({
+            type:types.uiStartLoading
+        })
 
-            // Creamosun objeto con los datos del usuario y la password nueva
-            const updateUser = {
-                ...state,
-                password : newPassword
-            }
-            dispatch({
-                type : types.dataUser, 
-                payload : updateUser
-            })
-
-            // Actualizamos la base de datos con la password nueva
-            let usuarioActualizado = db.collection("USERS").doc(user.uid);
-
-            // Cambiamos la contraseña por la nueva 
-            return usuarioActualizado.update({
-                password: newPassword
-            })
-            .then(() => {
-                alertPassword("Password Updated Correctly", 'bottom-end', 'success');
-            })
-            .catch((error) => {
-                // The document probably doesn't exist.
-                console.error("Error updating document: ", error);
-            })
-        }).catch((error) => {
-            alertPassword(error, 'bottom-end', 'error');
-        });
+        setTimeout(() => {
+            user.updatePassword(newPassword).then(() => {
+                console.log("Se Actualizo con exito");
+    
+                // Creamosun objeto con los datos del usuario y la password nueva
+                const updateUser = {
+                    ...state,
+                    password : newPassword
+                }
+                dispatch({
+                    type : types.dataUser, 
+                    payload : updateUser
+                })
+    
+                // Actualizamos la base de datos con la password nueva
+                let usuarioActualizado = db.collection("USERS").doc(user.uid);
+    
+                // Cambiamos la contraseña por la nueva 
+                return usuarioActualizado.update({
+                    password: newPassword
+                })
+                .then(() => {
+                    alertPassword("Password Updated Correctly", 'bottom-end', 'success');
+                    dispatch({
+                        type:types.uiFinishLoading
+                    })
+                })
+                .catch((error) => {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                })
+            }).catch((error) => {
+                alertPassword(error, 'bottom-end', 'error');
+            });
+        }, 3000);
     }
 
     /* Favoritesproducts */
@@ -201,7 +222,6 @@ const AuthState = ({children}) => {
     }
 
     const saveOrder = (order) => {
-
         dispatch({
             type: types.saveOrder,
             payload : order
@@ -222,6 +242,13 @@ const AuthState = ({children}) => {
         .catch((error) => {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
+        })
+    }
+
+    const setActiveOrder = (order) => {
+        dispatch({
+            type: types.setActiveOrder,
+            payload : order
         })
     }
 
@@ -261,6 +288,7 @@ const AuthState = ({children}) => {
                 addOrDeleteProductFavorite,
                 saveProductsFavoritesFirebase,
                 saveOrder,
+                setActiveOrder,
                 startLogout,
                 login
             }}

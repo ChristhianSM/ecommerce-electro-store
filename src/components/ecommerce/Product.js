@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 
+import {AiOutlineCloseCircle} from 'react-icons/ai'
 import {BiHeart} from 'react-icons/bi'
 import {BsHeartFill} from 'react-icons/bs'
 import { useHistory } from 'react-router'
@@ -18,13 +19,13 @@ export const Product = ({product}) => {
         setIsOpen(!isOpen);
     }
 
-    function closeModal() {
-        setIsOpen(false);
-    }
+    // function closeModal() {
+    //     setIsOpen(false);
+    // }
 
     // UseContext para obtener el state 
     const {addProductShoppingCart} = useContext(ProductContext);
-    const {state:stateAuth,   addOrDeleteProductFavorite} = useContext(AuthContext);
+    const {state:stateAuth,  addOrDeleteProductFavorite} = useContext(AuthContext);
 
     // History para hacer el logeo
     const history = useHistory()
@@ -39,7 +40,7 @@ export const Product = ({product}) => {
         }else{
             setIsFavorite(false)
         }
-    }, [stateAuth.favoritesProducts])
+    }, [stateAuth.favoritesProducts, product.id])
 
     // Funcion para agregar al carrito de compras.
     const handleAddProduct  = () => {
@@ -134,16 +135,26 @@ export const Product = ({product}) => {
                     </div>
                     </div>
                 </div>
+            </div>
                 {
                     isOpen &&
                     <div className = "w-screen h-screen bg-black fixed top-0 left-0 flex justify-center items-center bg-opacity-70 z-10">
-                        <div className = "w-1/3 h-1/3 animate__animated animate__bounceIn relative bg-white" >
-                            <img src={thumbnail} alt="" className = "object-contain" />
+                        <div className = "w-3/5 h-3/5 rounded-lg animate__animated animate__zoomIn relative bg-white p-5" >
+                            <div className = "flex justify-between items-center mb-10">
+                                <p className = "font-semibold text-2xl text-purple-500 ">{product.title}</p>
+                                <button 
+                                    type="button" 
+                                    className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                                    onClick = {() => setIsOpen(false)}
+                                >
+                                    <span class="sr-only">Close menu</span>
+                                    <AiOutlineCloseCircle className = "text-2xl "></AiOutlineCloseCircle>
+                                </button>
+                            </div>
+                            <img src={thumbnail} alt="" className = "object-contain h-4/5 mx-auto" />
                         </div>
                     </div>
                 }
-                <div></div>
-            </div>
         </>
         
     )
