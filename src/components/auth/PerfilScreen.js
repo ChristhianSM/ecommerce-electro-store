@@ -27,8 +27,9 @@ export const PerfilScreen = () => {
                 <div className="border shadow-lg p-5 flex items-center animate__animated animate__fadeIn">
                     <FaRegUserCircle className = "text-7xl font-semibold"></FaRegUserCircle>
                     <div className = "ml-5 text-2xl">
-                        <p>Hello !! </p>
+                        <p>Hola !! </p>
                         <p className = "font-bold">{state.name}</p>
+                        {/* <p>Nos alegra tenerte nuevamente por aqui :)</p> */}
                     </div>
                 </div>
 

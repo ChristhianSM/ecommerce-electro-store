@@ -32,7 +32,7 @@ export const ShoppingCartWindow = ({setModal, modal}) => {
                         }      
                     </ul>
                     <div className="space-y-1 text-right flex justify-between items-center border-t border-b border-gray-300 py-2">
-                        <p className = "text-purple-600 font-bold">Total amount:</p>
+                        <p className = "text-purple-600 font-bold">Total productos:</p>
                         <p className="font-semibold">S./ {totalAmount}</p>
                     </div> 
                     <div className="flex justify-between space-x-4">
@@ -42,12 +42,12 @@ export const ShoppingCartWindow = ({setModal, modal}) => {
                             onClick = {() => {
                                 setModal(!modal)
                             }}
-                        >Back
-                            <span className="sr-only sm:not-sr-only">to shop</span>
+                        >Volver 
+                            <span className="sr-only sm:not-sr-only">a la tienda</span>
                         </button>
                         <Link to = "/shoppingCart" className = "flex items-center"> 
                             <button type="button" className="px-6 py-2 border rounded-md bg-purple-600 text-coolGray-50 border-purple-600 text-white hover:bg-purple-700">
-                                <span className="sr-only sm:not-sr-only">Continue to</span>Checkout
+                                <span className="sr-only sm:not-sr-only">Continuar con </span>la compra
                             </button>
                         </Link>
                     </div>

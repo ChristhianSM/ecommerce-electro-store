@@ -22,7 +22,7 @@ export const ShoppingCartModal = ({setModal, modal}) => {
                                 shoppingCartFavorites : false,
                             })
                         }}
-                    >Your cart</button>
+                    >Mi carrito</button>
                     <button 
                         className={`text-xl font-semibold text-purple-600 w-full pb-2 ${windowComponent.shoppingCartFavorites && "border-b-2 border-purple-700"}`}
                         onClick = {() => {
@@ -31,7 +31,7 @@ export const ShoppingCartModal = ({setModal, modal}) => {
                                 shoppingCartFavorites : true,
                             })
                         }}
-                    >Favorites</button>
+                    >Favoritos</button>
                 </div>
                 {
                     windowComponent.shoppingCart 

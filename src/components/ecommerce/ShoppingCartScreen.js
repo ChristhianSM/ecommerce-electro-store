@@ -47,7 +47,7 @@ export const ShoppingCartScreen = () => {
                                 >
                                     <BsHandbag className = "text-2xl"></BsHandbag>
                                 </div>
-                                <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-purple-500"> Shopping Cart</div>
+                                <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-purple-500"> Carrito de compras</div>
                             </div>
                             <div 
                                 className={`flex-auto border-t-2 transition duration-500 ease-in-out ${statePasos.payment && "border-purple-600"}`}
@@ -58,7 +58,7 @@ export const ShoppingCartScreen = () => {
                                 >
                                     <MdPayment className = "text-2xl"></MdPayment>
                                 </div>
-                                <div className=" absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-purple-500">Payment</div>
+                                <div className=" absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-purple-500">Pagó</div>
                             </div>
                             <div
                                 className={`flex-auto border-t-2 transition duration-500 ease-in-out ${statePasos.confirmation && "border-purple-600"}`} 
@@ -69,7 +69,7 @@ export const ShoppingCartScreen = () => {
                                 >
                                     <BsFillCheckCircleFill className = "text-2xl"></BsFillCheckCircleFill>
                                 </div>
-                                <div className=" absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-purple-500">Confirmation</div>
+                                <div className=" absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-purple-500">Confirmacion</div>
                             </div>
                         </div>
                     </div>

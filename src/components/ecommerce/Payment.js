@@ -44,7 +44,7 @@ export const Payment = ({shoppingCart,total, statePasos, setStatePasos , setStat
                 }
                 <div className = "border-b border-gray-300">
                     <div className = "flex justify-between items-center">
-                        <p className = "ml-5 font-bold text-base">SubTotal : </p>
+                        <p className = "ml-5 font-bold text-base">Subtotal : </p>
                         <p className = "mr-5 text-lg font-bold">S/. {statePayment.subtotal}</p>
                     </div>
                     {

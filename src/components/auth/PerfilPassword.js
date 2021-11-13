@@ -43,12 +43,12 @@ export const PerfilPassword = () => {
                             <div className="w-1/3 mr-1">
                                 <label 
                                     className={`block text-grey-darker text-sm font-bold mb-2 ${formik.touched.currentPassword && formik.errors.currentPassword && 'text-red-500'}`} 
-                                    htmlFor="first_name">Current password</label>
+                                    htmlFor="first_name">Contraseña actual </label>
                                 <input 
                                     className={`appearance-none border rounded w-full py-2 px-3 text-grey-darker outline-none ${formik.touched.currentPassword && formik.errors.currentPassword && 'errorInput'}`} 
                                     name="currentPassword" 
                                     type="password" 
-                                    placeholder="Your Current password *"
+                                    placeholder="Contraseña actual *"
                                     value = {formik.values.currentPassword}
                                     onChange = {formik.handleChange}
                                     onBlur = {formik.handleBlur}
@@ -58,12 +58,12 @@ export const PerfilPassword = () => {
                             <div className="w-1/3 ml-1">
                                 <label 
                                     className={`block text-grey-darker text-sm font-bold mb-2 ${formik.touched.newPassword && formik.errors.newPassword && 'text-red-500'}`}
-                                    htmlFor="last_name">New password</label>
+                                    htmlFor="last_name">Nueva Contraseña</label>
                                 <input 
                                     className={`appearance-none border rounded w-full py-2 px-3 text-grey-darker outline-none ${formik.touched.newPassword && formik.errors.newPassword && 'errorInput'}`} 
                                     name="newPassword" 
                                     type="password" 
-                                    placeholder="Your new password *"
+                                    placeholder="Nueva Contraseña *"
                                     value = {formik.values.newPassword}
                                     onChange = {formik.handleChange}
                                     onBlur = {formik.handleBlur}
@@ -74,12 +74,12 @@ export const PerfilPassword = () => {
                             <div className="w-1/3 ml-1">
                                 <label 
                                     className={`block text-grey-darker text-sm font-bold mb-2 ${formik.touched.confirmPassword && formik.errors.confirmPassword && 'text-red-500'}`}
-                                    htmlFor="last_name">Confirm Password</label>
+                                    htmlFor="last_name">Confirmar contraseña</label>
                                 <input 
                                     className={`appearance-none border rounded w-full py-2 px-3 text-grey-darker outline-none ${formik.touched.confirmPassword && formik.errors.confirmPassword && 'errorInput'}`} 
                                     name="confirmPassword" 
                                     type="password" 
-                                    placeholder="Confirm Password *"
+                                    placeholder="Confirmar contraseña *"
                                     value = {formik.values.confirmPassword}
                                     onChange = {formik.handleChange}
                                     onBlur = {formik.handleBlur}

@@ -41,7 +41,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
         <div className="flex my-10">
             <div className="w-3/4 bg-white px-10 py-10 animate__animated animate__zoomIn">
                 <div className="flex justify-between border-b pb-2">
-                    <h1 className="font-semibold text-2xl">Shopping Cart</h1>
+                    <h1 className="font-semibold text-2xl">Mi carrito de compras</h1>
                     <h2 className="font-semibold text-2xl">
                         {
                             shoppingCart.length === 0 
@@ -59,9 +59,9 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                     ?
                     <>
                         <div className="flex mt-10 mb-5">
-                            <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
-                            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Quantity</h3>
-                            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Price</h3>
+                            <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Detalles del producto</h3>
+                            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Cantidad</h3>
+                            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Precio</h3>
                             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Total</h3>
                         </div>
                         {
@@ -82,7 +82,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                                                     >
                                                         <GrTrash className = "text-base"></GrTrash>
                                                         
-                                                        <span>Remove</span>
+                                                        <span>Quitar</span>
                                                     </button>
                                                     <button 
                                                         type="button" 
@@ -92,7 +92,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                                                         }}
                                                     >
                                                         <MdFavoriteBorder></MdFavoriteBorder>
-                                                        <span>Add to favorites</span>
+                                                        <span>Agregar a favoritos</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -123,13 +123,13 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                 <Link to = "/">
                     <button className="flex font-semibold text-indigo-600 text-sm mt-5 items-center">
                         <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
-                        Continue Shopping
+                        Continuar Comprando
                     </button>
                 </Link>
             </div>
 
             <div id="summary" className="w-1/4 px-8 py-10 bg-gray-100">
-                <h3 className="font-semibold text-2xl border-b pb-2">Coupons and Discounts</h3>
+                <h3 className="font-semibold text-2xl border-b pb-2">Cupones y descuentos</h3>
                 <div className="py-5 flex gap-1 items-center">
                     <IoTicketOutline className = "text-4xl"></IoTicketOutline>
                     <div className = "relative w-full">
@@ -137,7 +137,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                             <input 
                                 type="text" 
                                 id="promo" 
-                                placeholder="Enter your code" 
+                                placeholder="Ingresa tu codigo" 
                                 className="p-2 pr-20 text-sm w-full outline-none border border-gray-400 rounded-lg"
                                 onChange = {handleCode}
                                 value = {code}
@@ -145,7 +145,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                             <button 
                                 className = "absolute top-0 right-0 border border-purple-600 h-full px-3 rounded-tr-lg rounded-br-lg text-purple-600 hover:bg-purple-500 hover:text-white"
                                 type = "submit"
-                            >Apply</button>
+                            >Aplicar</button>
                         </form>
                     </div>
                 </div>
@@ -155,11 +155,10 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                     className = "mx-auto"
                     enabled = {statePayment.loading}
                 />
-
-                <div className="mt-10">
+                <div className="mt-2">
                     <h3 className="font-semibold text-2xl pb-2">Resumen</h3>
                     <div className="flex justify-between mt-10 mb-3">
-                       <span className="font-semibold text-sm"> SubTotal</span>
+                       <span className="font-semibold text-sm"> Subtotal</span>
                         <span className="font-semibold text-sm">S/. {statePayment.subtotal}</span>
                     </div>
                     {
@@ -172,7 +171,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                 </div>
                 <div className="border-t mt-2">
                     <div className="flex font-bold justify-between py-4 text-sm">
-                        <span>Total cost</span>
+                        <span>Total normal</span>
                         {
                             statePayment.total 
                             ? <span>S/. {statePayment.total}</span>
@@ -196,7 +195,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
 
                             handleContinue();
                         }}
-                    >Continue</button>
+                    >Continuar</button>
                 </div>
             </div>
         </div>
