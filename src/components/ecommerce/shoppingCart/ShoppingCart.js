@@ -2,18 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import {BsFillCartXFill} from 'react-icons/bs'
 import {IoTicketOutline} from 'react-icons/io5'
-import {MdFavoriteBorder} from 'react-icons/md'
-import {GrTrash} from 'react-icons/gr'
-import PaymentContext from '../../context/payment/PaymentContext';
-import ProductContext from '../../context/product/ProductContext';
-import AuthContext from '../../context/auth/AuthContext';
+import PaymentContext from '../../../context/payment/PaymentContext';
+import ProductContext from '../../../context/product/ProductContext';
 import { SpinnerCircularFixed } from 'spinners-react';
+import { ShoppingCartProduct } from './ShoppingCartProduct';
 
 export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setStateComponent }) => {
+    
+    // State de la aplicacion
     const {state:statePayment, applyCouponDiscount, resetPayment} = useContext(PaymentContext);
-
     const {removeProductShoppingCart} = useContext(ProductContext);
-    const {addOrDeleteProductFavorite} = useContext(AuthContext);
 
     // Para simular spinner
 
@@ -27,8 +25,21 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
     }
 
     const handleContinue = () => {
-        if (statePayment.couponDiscount === 0) {
-            applyCouponDiscount('', statePayment.subtotal);
+        if (shoppingCart.length > 0 ) {
+            if (statePayment.couponDiscount === 0) {
+                applyCouponDiscount('', statePayment.subtotal);
+            }
+            setStatePasos({
+                ...statePasos,
+                payment : true,
+            })
+            setStateComponent({
+                componentShoppingCart : false,
+                componentPayment : true,
+                componentConfirmation : false,
+            })
+        }else{
+            console.log("Tu carrito anda vacio perro");
         }
     }
 
@@ -40,15 +51,15 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
     return (
         <div className="flex my-10">
             <div className="w-3/4 bg-white px-10 py-10 animate__animated animate__zoomIn">
-                <div className="flex justify-between border-b pb-2">
+                <div className="flex justify-between border-b pb-2 mb-5">
                     <h1 className="font-semibold text-2xl">Mi carrito de compras</h1>
                     <h2 className="font-semibold text-2xl">
                         {
                             shoppingCart.length === 0 
                             ? "" 
                             : shoppingCart.length === 1 
-                            ? `${shoppingCart.length} Product`
-                            : `${shoppingCart.length} Products`  
+                            ? `${shoppingCart.length} Producto`
+                            : `${shoppingCart.length} Productos`  
                         } 
                     </h2>
                 </div>
@@ -58,57 +69,15 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                     shoppingCart.length > 0 
                     ?
                     <>
-                        <div className="flex mt-10 mb-5">
-                            <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Detalles del producto</h3>
-                            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Cantidad</h3>
-                            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Precio</h3>
-                            <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 ">Total</h3>
-                        </div>
                         {
                             shoppingCart.map( product => {
                                 return (
-                                    <div className = "flex mb-8 items-center animate__animated animate__zoomIn" key = {product.id}>
-                                        <div className="w-2/5 flex gap-3">
-                                            <img src={product.thumbnail} alt="" className = "object-contain h-24" />
-                                            <div>
-                                                <p>{product.title}</p>  
-                                                <div className = "flex gap-3 mt-3">
-                                                    <button 
-                                                        type="button" 
-                                                        className="flex items-center px-2 py-1 pl-0 space-x-1 hover:text-red-600"
-                                                        onClick = {() => {
-                                                            removeProductShoppingCart(product.id)
-                                                        }}
-                                                    >
-                                                        <GrTrash className = "text-base"></GrTrash>
-                                                        
-                                                        <span>Quitar</span>
-                                                    </button>
-                                                    <button 
-                                                        type="button" 
-                                                        className="flex items-center py-1 space-x-1 hover:text-green-600"
-                                                        onClick = {() => {
-                                                            addOrDeleteProductFavorite(product)
-                                                        }}
-                                                    >
-                                                        <MdFavoriteBorder></MdFavoriteBorder>
-                                                        <span>Agregar a favoritos</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="w-1/5 text-center">
-                                            <p>x {product.amount}</p>
-                                        </div>
-                                        <div className="w-1/5 text-center">
-                                            <p>S/. {product.price}</p>
-                                        </div>
-                                        <div className="w-1/5 text-center">
-                                            <p>S/. {product.price*product.amount}</p>
-                                        </div>
-                                    </div>
+                                    <ShoppingCartProduct 
+                                        key = {product.id}
+                                        product = {product}
+                                    />
                                 )
-                            })
+                            }) 
                         }
                     </>
                     : 
@@ -183,16 +152,6 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                         className={`bg-purple-500 font-semibold hover:bg-purple-600 py-3 text-sm text-white uppercase w-full rounded-lg ${statePayment.loading && 'bg-gray-500 cursor-not-allowed'}`}
                         disabled = {statePayment.loading}
                         onClick = {() => {
-                            setStatePasos({
-                                ...statePasos,
-                                payment : true,
-                            })
-                            setStateComponent({
-                                componentShoppingCart : false,
-                                componentPayment : true,
-                                componentConfirmation : false,
-                            })
-
                             handleContinue();
                         }}
                     >Continuar</button>

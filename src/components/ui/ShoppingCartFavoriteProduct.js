@@ -20,7 +20,11 @@ export const ShoppingCartFavoriteProduct = ({product}) => {
                         </div>
                         <div className="text-right">
                             <p className="text-base font-semibold">S/.{product.price}</p>
-                            <p className="text-xs line-through text-coolGray-400">S/.{product.original_price}</p>
+                            <p className="text-xs line-through text-coolGray-400">
+                                {
+                                    product.original_price && `S/.${product.original_price}`
+                                } 
+                            </p>
                         </div>
                     </div>
                     <div className="flex text-sm divide-x">

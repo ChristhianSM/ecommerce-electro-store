@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {BsTruck} from 'react-icons/bs'
 import {IoStorefrontOutline} from 'react-icons/io5'
-import PaymentContext from '../../context/payment/PaymentContext'
+import PaymentContext from '../../../context/payment/PaymentContext'
 import { FormPayment } from './FormPayment'
 
 export const Payment = ({shoppingCart,total, statePasos, setStatePasos , setStateComponent ,stateComponent}) => {

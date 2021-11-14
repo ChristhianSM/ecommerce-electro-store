@@ -1,29 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import {GoSettings} from 'react-icons/go'
-import ProductContext from '../../context/product/ProductContext';
+import { Checkbox } from '../ecommerce/shop/Checkbox';
 
-export const Aside = ({category}) => {
-
-    const marcas = ["Lenovo", "HP", "Dell", "Asus", "Apple", "Acer", "MSI", "Toshiba", "Huawei"];
-
-    const {state, setFilters, deleteFilter, getProductsForFilters} = useContext(ProductContext);
-
-    const stateFilters = state.filters;
-
-    useEffect(() => {
-        deleteFilter();
-    }, [])
-
-    const handleCheck = (e) => {
-        const currentIndex = stateFilters.indexOf(e.target.name);
-        if (e.target.checked) {
-            stateFilters.push(e.target.name);
-        }else{
-            stateFilters.splice(currentIndex, 1);;           
-        } 
-        setFilters(stateFilters);
-        getProductsForFilters();
-    }
+export const Aside = ({category, marcas}) => {
 
     const handlePrice = () => {
         
@@ -41,19 +20,14 @@ export const Aside = ({category}) => {
 
                 <div className="marca my-4">
                     <h3 className = "text-lg font-bold">Marca</h3>
-                    {
-                        marcas.map( marca => {
+                    {   
+                       
+                       marcas.map( marca => {
                             return (
-                                <div className = "flex items-center my-2" key = {marca}>
-                                    <input 
-                                        type="checkbox" 
-                                        className = "mr-2 h-5 w-5"
-                                        name={marca} 
-                                        id={marca} 
-                                        onChange = {handleCheck}
-                                    />
-                                    <label htmlFor={marca} className = "text-lg">{marca}</label>
-                                </div>
+                                <Checkbox 
+                                    key = {marca}
+                                    marca = {marca}
+                                />
                             )
                         })
                     }

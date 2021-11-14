@@ -1,3 +1,20 @@
+export const getDataProductId = async (id) => {
+    const response = await fetch(`https://api.mercadolibre.com/items/${id}`) ;
+    const data = await response.json();
+    const {title, thumbnail, original_price,  price, pictures, attributes} = data;
+    const product = {
+        title,
+        thumbnail,
+        original_price,
+        price,
+        pictures,
+        attributes
+    }
+
+    return product
+}
+
+
 // Function para calcular el total del carrito de compras
 export const getTotalAmount = (products) => {
     const suma = products.reduce( (prev, current) => prev + current.amount*current.price, 0);

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import {IoHeartDislikeOutline} from 'react-icons/io5'
-import AuthContext from '../../context/auth/AuthContext';
-import ProductContext from '../../context/product/ProductContext';
+import AuthContext from '../../../context/auth/AuthContext';
+import ProductContext from '../../../context/product/ProductContext';
 
 export const PerfilFavorites = ({favoritesProducts}) => {
 

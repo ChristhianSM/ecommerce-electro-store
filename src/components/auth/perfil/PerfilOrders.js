@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import {FaClipboardList} from 'react-icons/fa'
-import AuthContext from '../../context/auth/AuthContext'
-import { ModalOrder } from '../ui/modals/ModalOrder';
+import AuthContext from '../../../context/auth/AuthContext'
+import { ModalOrder } from '../../ui/modals/ModalOrder';
 
 export const PerfilOrders = () => {
 

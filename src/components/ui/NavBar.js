@@ -17,8 +17,10 @@ export const NavBar = () => {
     const {state:{shoppingCart}} = useContext(ProductContext);
 
     const [modal, setModal] = useState(false);
+
     // UseEfecct para agregar una animacion al carrito de compras
-    const [animacionShoppingCart, setAnimacionShoppingCart] = useState(false)
+    const [animacionShoppingCart, setAnimacionShoppingCart] = useState(false);
+
     useEffect(() => {
         setAnimacionShoppingCart(true);
         setTimeout(() => {
@@ -130,6 +132,12 @@ export const NavBar = () => {
                             <li className = "mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-blue-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white">
                                 
                                 Celulares
+                            </li>
+                        </Link>
+                        <Link to = "/products/accesorios">
+                            <li className = "mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-blue-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+                                
+                                Accesorios
                             </li>
                         </Link>
                     </ul>

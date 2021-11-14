@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import AuthContext from '../../context/auth/AuthContext'
-import { alertPassword } from '../../helpers/alerts'
+import AuthContext from '../../../context/auth/AuthContext'
+import { alertPassword } from '../../../helpers/alerts'
 import { SpinnerCircularFixed } from 'spinners-react'
 
 export const PerfilPassword = () => {

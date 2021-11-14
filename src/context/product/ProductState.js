@@ -2,10 +2,10 @@
 import React, { useReducer } from 'react'
 import ProductContext from './ProductContext';
 import { productReducer } from './productReducer'
-import data from '../../helpers/data.json'
 import { types } from '../../types/types';
 import { alertAddProduct } from '../../helpers/alerts';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
+import { getDocumentByQuery, getDocuments } from '../../firebase/firebaseData';
 
 const ProductState = ({children}) => {
 
@@ -14,7 +14,6 @@ const ProductState = ({children}) => {
         featuredProducts : [],
         filters: [],
         filteredProducts : [],
-        filteredProductsForFilters : [],
         shoppingCart : getLocalStorage("ShoppingCart") || [],
         selectedProduct : null,
     }
@@ -24,44 +23,55 @@ const ProductState = ({children}) => {
     // Insertamos en el localStorage el carrito de compras
     setLocalStorage(state.shoppingCart)
 
-    const startLoadingProducts = () => {
+    const startLoadingProducts = async () => {
         // Obtenemos los productos de firebase
+        const data = await getDocuments("PRODUCTS");
 
         // Actualizamos el estado de la applicacion
         dispatch({
             type : types.loadProduct,
-            payload : data.products
+            payload : data
         })
 
-        const featuredProducts = data.products.filter(product => product.destacado);
+        const featuredProducts = data.filter(product => product.destacado);
         dispatch({
             type : types.loadFeaturedProducts,
             payload : featuredProducts
         })
     }
 
-    // const uploadFeaturedProducts = () => {
-    //     // const featuredProducts = products.filter(product => product.destacado);
-    //     // dispatch({
-    //     //     type: types.loadFeaturedProducts,
-    //     // })
-    // }
+    const loadFeaturedProducts = async () => {
+        
+        // Obtenemos los productos de firebase
+        const data = await getDocumentByQuery("PRODUCTS", {
+            key: "destacado",
+            condition : "==",
+            value: true
+        });
+
+        // Actualizamos el estado de la applicacion
+        dispatch({
+            type : types.loadFeaturedProducts,
+            payload : data
+        });
+    }
 
     const getMarcaProducts = (products) => {
         // const marcas = products.filter( product => )
     }
 
-    const getProductsForCategory = (category, products) => {
-        const productsForCategory = products.filter( product => product.type === category);
+    const getProductsForCategory = async (category) => {
+        // Obtenemos los productos de firebase
+        const data = await getDocumentByQuery("PRODUCTS", {
+            key: "type",
+            condition : "==",
+            value: category
+        });
+
         dispatch({
             type: types.loadProductsForCategory,
-            payload: productsForCategory
+            payload: data
         })
-
-        // dispatch({
-        //     type: types.setFilteredProductsForFilters,
-        //     payload: productsForCategory
-        // })
     }
 
     /* Funciones para el filtrado de productos */
@@ -77,19 +87,23 @@ const ProductState = ({children}) => {
         })
     }
 
-    const getProductsForFilters = () => {
+    const getProductsForFilters = (category) => {
         let products = [];
         state.filters.forEach( marca => {
-            state.filteredProducts.forEach( product => {
-                if (product.marca === marca) {
+            state.products.forEach( product => {
+                if (product.marca === marca && product.type === category) {
                     products.push(product);
                 }
             })   
         })
-        dispatch({
-            type: types.setFilteredProducts,
-            payload: products
-        })
+        if (state.filters.length === 0) {
+            getProductsForCategory(category)
+        }else{
+            dispatch({
+                type: types.loadProductsForCategory,
+                payload: products
+            })
+        }
     }
 
     const getProductsForOrder = (products) => {
@@ -110,14 +124,19 @@ const ProductState = ({children}) => {
         const isRepit = state.shoppingCart.some( stateProduct => stateProduct.id === newProduct.id);
 
         if (isRepit) {
-            const updatedProduct = state.shoppingCart.find( item => item.id === newProduct.id);
-            updatedProduct.amount ++;
+            const updatedProduct = state.shoppingCart.find( item => (item.id === newProduct.id));
+            if (updatedProduct.amount < parseInt(updatedProduct.stock)) {
+                updatedProduct.amount ++;
+                alertAddProduct("Producto actualizado correctamente");
+            }else{
+                alertAddProduct(`Solo contamos con ${updatedProduct.stock} unidades de este producto`);
+            }
 
             dispatch({
                 type: types.shoppingCartUpdateAmountProduct,
                 payload : updatedProduct,
             })
-            alertAddProduct("Producto actualizado correctamente");
+
         }else{
             dispatch({
                 type: types.shoppingCartAddProduct,
@@ -158,7 +177,7 @@ const ProductState = ({children}) => {
                 state,
 
                 startLoadingProducts,
-                // uploadFeaturedProducts,
+                loadFeaturedProducts,
                 getMarcaProducts,
                 getProductsForCategory,
 
@@ -173,8 +192,6 @@ const ProductState = ({children}) => {
                 updateAmountShoppingCart,
                 removeProductShoppingCart,
                 clearShoppingCart,
-
-                // addOrDeleteProductFavorite,
             }}
         >
             {children}

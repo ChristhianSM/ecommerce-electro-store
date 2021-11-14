@@ -7,14 +7,15 @@ import {
 } from "react-router-dom";
 
 import { LoginScreen } from "../components/auth/LoginScreen";
-import { PerfilScreen } from "../components/auth/PerfilScreen";
+import { PerfilScreen } from "../components/auth/perfil/PerfilScreen";
 import { RegisterScreen } from "../components/auth/RegisterScreen";
-import { HomeScreen } from "../components/ecommerce/HomeScreen";
-import { Products } from "../components/ecommerce/Products";
-import { ProductScreen } from "../components/ecommerce/ProductScreen";
-import { ShoppingCartScreen } from "../components/ecommerce/ShoppingCartScreen";
+import { HomeScreen } from "../components/ecommerce/shop/HomeScreen";
+import { ContainerProductCategory } from "../components/ecommerce/shop/ContainerProductCategory";
+import { ProductScreen } from "../components/ecommerce/shop/ProductScreen";
+import { ShoppingCartScreen } from "../components/ecommerce/shoppingCart/ShoppingCartScreen";
 import AuthContext from "../context/auth/AuthContext";
 import { auth } from "../firebase/firebaseConfig";
+import { Footer } from "../components/ecommerce/Footer";
 
 export const AppRoute = () => {
 
@@ -39,11 +40,12 @@ export const AppRoute = () => {
                     <Route exact path = "/perfil" component = {PerfilScreen}/>
                     <Route  exact path = "/" component = {HomeScreen}/>
                     <Route  exact path = "/shoppingCart" component = {ShoppingCartScreen}/>
-                    <Route  exact path = "/products/:category" component = {Products}/>
-                    <Route  exact path = "/products/:category/:nameProduct" component = {ProductScreen}/>
+                    <Route  exact path = "/products/:category" component = {ContainerProductCategory}/>
+                    <Route  exact path = "/products/:category/:id" component = {ProductScreen}/>
                     <Redirect to = "/"/>
                 </Switch>
             </div>
+                <Footer />
         </Router>
     )
 }

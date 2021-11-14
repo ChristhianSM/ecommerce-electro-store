@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import {BiHeart} from 'react-icons/bi'
-import {BsHeartFill} from 'react-icons/bs'
+import { MdFavorite, MdFavoriteBorder } from 'react-icons/md'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import AuthContext from '../../context/auth/AuthContext'
-import ProductContext from '../../context/product/ProductContext'
+import AuthContext from '../../../context/auth/AuthContext'
+import ProductContext from '../../../context/product/ProductContext'
 
 export const Product = ({product}) => {
     const {title, thumbnail, price, original_price, marca, type, id} = product;
@@ -19,10 +19,6 @@ export const Product = ({product}) => {
         setIsOpen(!isOpen);
     }
 
-    // function closeModal() {
-    //     setIsOpen(false);
-    // }
-
     // UseContext para obtener el state 
     const {addProductShoppingCart} = useContext(ProductContext);
     const {state:stateAuth,  addOrDeleteProductFavorite} = useContext(AuthContext);
@@ -31,7 +27,6 @@ export const Product = ({product}) => {
     const history = useHistory()
 
     const [isFavorite, setIsFavorite] = useState(false);
-
 
     useEffect(() => {
         const favoriteProduct = stateAuth.favoritesProducts.find( itemProduct => itemProduct.id === product.id);
@@ -78,12 +73,12 @@ export const Product = ({product}) => {
                             {
                                 isFavorite 
                                 ?
-                                <BiHeart 
-                                    className = "w-full h-8 animate__animated"
+                                <MdFavoriteBorder
+                                    className = "w-full h-7 animate__animated"
                                     onClick = {handleAddOrDeleteFavoriteProduct}
                                 />
                                 :
-                                <BsHeartFill 
+                                <MdFavorite
                                     className = "w-full h-7 text-red-600 animate__animated animate__bounceIn"
                                     onClick = {handleAddOrDeleteFavoriteProduct}
                                 />
@@ -138,7 +133,7 @@ export const Product = ({product}) => {
             </div>
                 {
                     isOpen &&
-                    <div className = "w-screen h-screen bg-black fixed top-0 left-0 flex justify-center items-center bg-opacity-70 z-10">
+                    <div className = "w-full h-full bg-black fixed top-0 left-0 flex justify-center items-center bg-opacity-70 z-10">
                         <div className = "w-3/5 h-3/5 rounded-lg animate__animated animate__zoomIn relative bg-white p-5" >
                             <div className = "flex justify-between items-center mb-10">
                                 <p className = "font-semibold text-2xl text-purple-500 ">{product.title}</p>

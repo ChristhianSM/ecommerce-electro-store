@@ -31,23 +31,13 @@ export const productReducer = (state, action) =>{
                 ...state,
                 filters : []
             }
-        case types.setFilteredProducts:
-            return {
-                ...state,
-                filteredProductsForFilters : action.payload
-            }
-        case types.setFilteredProductsForFilters:
-            return {
-                ...state,
-                filteredProductsForFilters : action.payload
-            }
-
         case types.setProductsForOrder:
             return {
                 ...state,
-                filteredProductsForFilters : action.payload
+                filteredProducts : action.payload
             }
-
+        
+        // Shopping cart
         case types.shoppingCartAddProduct:
             return {
                 ...state,

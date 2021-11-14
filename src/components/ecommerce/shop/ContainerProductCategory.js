@@ -1,14 +1,33 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import ProductContext from '../../context/product/ProductContext'
-import { orderProducts } from '../../helpers/functions'
-import { Aside } from '../ui/Aside'
-import { NavBar } from '../ui/NavBar'
-import { ProductCategory } from './ProductCategory'
+import ProductContext from '../../../context/product/ProductContext'
+import { getMarcas } from '../../../firebase/firebaseData'
+import { orderProducts } from '../../../helpers/functions'
+import { Aside } from '../../ui/Aside'
+import { NavBar } from '../../ui/NavBar'
+import { ProductsCategory } from './ProductsCategory'
 
-export const Products = () => {
+export const ContainerProductCategory = () => {
     const params = useParams();
-    const {state, getProductsForOrder,deleteFilter} = useContext(ProductContext);
+    const {state, getProductsForOrder, getProductsForCategory, deleteFilter} = useContext(ProductContext);
+
+    const [marcas, setMarcas] = useState([]);
+
+    useEffect(() => {
+        getProductsForCategory(params.category, state.products);
+        deleteFilter();
+
+        // Cuando carga el componente con una nueva categoria, traemos las marcas de dicha categoria
+        const getMarcasFirebase = async () => {
+            const marc = await getMarcas("PRODUCTS", {
+                key: "type",
+                condition : "==",
+                value: params.category
+            })
+            setMarcas(marc);
+        }
+        getMarcasFirebase();
+    }, [params.category])
 
     const handleSelect = (e) => {
         const productosOrdenados = orderProducts(state.filteredProducts, e.target.value); 
@@ -22,7 +41,7 @@ export const Products = () => {
                 <div className = "col-span-4 flex justify-between items-end border-b border-gray-400 pb-3">
                     <p className = "text-xl font-semibold"> Filtrados : 
                         <span className = "bg-gray-400 rounded-lg p-2 text-lg font-light ml-3">
-                        { state.filteredProductsForFilters.length === 0 ? state.filteredProducts.length : state.filteredProductsForFilters.length}  Productos
+                        { state.filteredProducts.length }  Productos
                         </span>
                     </p>
                     <select 
@@ -40,8 +59,11 @@ export const Products = () => {
                 </div>
                 <Aside 
                     category = {(params.category).toUpperCase()}
+                    marcas = {marcas}
                 />
-                <ProductCategory className = "col-span-3"/>
+                <ProductsCategory 
+                    className = "col-span-3"
+                />
             </div>
         </>
     )

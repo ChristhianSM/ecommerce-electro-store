@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BsHandbag, BsFillCheckCircleFill} from 'react-icons/bs'
 import {MdPayment} from 'react-icons/md';
-import { NavBar } from '../ui/NavBar'
-import ProductContext from '../../context/product/ProductContext'
+import { NavBar } from '../../ui/NavBar'
+import ProductContext from '../../../context/product/ProductContext'
 import { ShoppingCart } from './ShoppingCart';
 import { Payment } from './Payment';
 import { Confirmation } from './Confirmation';
-import { getTotalAmount } from '../../helpers/functions';
-import PaymentContext from '../../context/payment/PaymentContext';
+import { getTotalAmount } from '../../../helpers/functions';
+import PaymentContext from '../../../context/payment/PaymentContext';
 
 export const ShoppingCartScreen = () => {
     

@@ -5,11 +5,11 @@ import {FaShoppingCart} from 'react-icons/fa'
 import {FiHelpCircle} from 'react-icons/fi'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import AuthContext from '../../context/auth/AuthContext'
-import PaymentContext from '../../context/payment/PaymentContext'
-import { totalToPayInCoutas } from '../../helpers/functions'
+import AuthContext from '../../../context/auth/AuthContext'
+import PaymentContext from '../../../context/payment/PaymentContext'
+import { totalToPayInCoutas } from '../../../helpers/functions'
 import { Link } from 'react-router-dom'
-import { ModalPayment } from '../ui/modals/Modal'
+import { ModalPayment } from '../../ui/modals/Modal'
 
 export const FormPayment = ({setStatePasos , setStateComponent}) => {
 

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from "react";
 // import { SpinnerCircular, SpinnerDotted } from "spinners-react";
-import ProductContext from "../../context/product/ProductContext";
+import ProductContext from "../../../context/product/ProductContext";
 import { Product } from "./Product";
 
 export const FeaturedProducts = () => {
 
-  const {state, startLoadingProducts} = useContext(ProductContext);
+  const {state, loadFeaturedProducts} = useContext(ProductContext);
 
     useEffect(() => {
-      startLoadingProducts();
+      loadFeaturedProducts();
   }, [])
 
   return (

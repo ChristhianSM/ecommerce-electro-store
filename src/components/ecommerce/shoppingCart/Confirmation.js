@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import {AiFillLock} from 'react-icons/ai'
-import PaymentContext from '../../context/payment/PaymentContext'
-import { ModalConfirmation } from '../ui/modals/ModalConfirmation';
+import PaymentContext from '../../../context/payment/PaymentContext'
+import { ModalConfirmation } from '../../ui/modals/ModalConfirmation';
 
 export const Confirmation = ({shoppingCart}) => {
 
