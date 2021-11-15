@@ -1,17 +1,31 @@
+const BASE_URL_MERCADO = "https://api.mercadolibre.com";
+
 export const getDataProductId = async (id) => {
-    const response = await fetch(`https://api.mercadolibre.com/items/${id}`) ;
-    const data = await response.json();
-    const {title, thumbnail, original_price,  price, pictures, attributes} = data;
+    const promesas = await Promise.all([fetcher(`/items/${id}`), fetcher(`/items/${id}/description`)]);
+    const {title, thumbnail, original_price,  price, pictures, attributes, available_quantity, seller_id} = promesas[0];
     const product = {
         title,
         thumbnail,
         original_price,
         price,
         pictures,
-        attributes
+        attributes,
+        stock: available_quantity
     }
 
-    return product
+    // Obtenemos los productos del vendedor 
+    const response = await fetch(BASE_URL_MERCADO + `/sites/MPE/search?seller_id=${seller_id}`);
+    const data = await response.json();
+
+    const destription = promesas[1].plain_text;
+
+    return [product, destription, data.results]
+}
+
+const fetcher = async (path) => {
+    let response = await fetch(BASE_URL_MERCADO + path);
+    let data = await response.json();
+    return data;
 }
 
 

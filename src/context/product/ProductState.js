@@ -6,6 +6,7 @@ import { types } from '../../types/types';
 import { alertAddProduct } from '../../helpers/alerts';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
 import { getDocumentByQuery, getDocuments } from '../../firebase/firebaseData';
+import { getDataProductId } from '../../helpers/functions';
 
 const ProductState = ({children}) => {
 
@@ -15,7 +16,8 @@ const ProductState = ({children}) => {
         filters: [],
         filteredProducts : [],
         shoppingCart : getLocalStorage("ShoppingCart") || [],
-        selectedProduct : null,
+        selectedProduct : {},
+        loading: false,
     }
 
     const [state, dispatch] = useReducer(productReducer, initialState);
@@ -170,6 +172,25 @@ const ProductState = ({children}) => {
         })
     }
 
+    const setSelectProduct = async (id) => {
+        if (id) {
+            const [product, description, similarsProducts] = await getDataProductId(id);
+            dispatch({
+                type: types.productSelectProduct,
+                payload : {
+                    ...product,
+                    description, 
+                    similarsProducts
+                },
+            })
+        }else{
+            dispatch({
+                type: types.productSelectProduct,
+                payload : {},
+            })
+        }
+    }
+
 
     return (
         <ProductContext.Provider
@@ -192,6 +213,9 @@ const ProductState = ({children}) => {
                 updateAmountShoppingCart,
                 removeProductShoppingCart,
                 clearShoppingCart,
+
+                // Funciones para el producto seleccionado
+                setSelectProduct
             }}
         >
             {children}

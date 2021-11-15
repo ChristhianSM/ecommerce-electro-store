@@ -28,6 +28,10 @@ export const types = {
     shoppingCartRemoveProduct : "[Shopping Cart] Remove Product Shopping Cart",
     shoppingCartClear : "[Shopping Cart] Clear Shopping Cart",
 
+    // Select Product
+    productSelectProduct: "[Product] Set Select Product",
+    productResetProduct: "[Product] Reset Product",
+
     // Payment
     paymentSetDataInitial : "[Payment] Set Data Initial",
     paymentCouponDiscount : "[Payment] Apply coupon discount",

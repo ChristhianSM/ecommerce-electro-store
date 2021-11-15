@@ -82,6 +82,12 @@ export const productReducer = (state, action) =>{
                 ...state,
                 shoppingCart : []
             }
+
+        case types.productSelectProduct:
+            return {
+                ...state,
+                selectedProduct : action.payload
+            }
     
         default:
             return {
