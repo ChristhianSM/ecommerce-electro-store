@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { SpinnerCircular } from 'spinners-react'
-import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
+import { SwipperSimilarProduct } from './SwipperSimilarProduct'
 import { useParams } from 'react-router'
+import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
+
 import { NavBar } from '../../ui/NavBar'
 import ProductContext from '../../../context/product/ProductContext'
 import AuthContext from '../../../context/auth/AuthContext'
-
-import { SwipperSimilarProduct } from './SwipperSimilarProduct'
 import { ProductCharacteristics } from './ProductCharacteristics'
-
+import { ProductDescription } from './ProductDescription'
+import { ProductDevolution } from './ProductDevolution'
 
 export const ProductScreen = () => {
     const {id} = useParams();
@@ -19,9 +20,13 @@ export const ProductScreen = () => {
 
     const [loading, setLoading] = useState(true);
     const [favorite, setFavorite] = useState(false);
+    const [component, setComponent] = useState({
+        componentDescription : true,
+        componentDevolution: false,
+        componentCharacteristics: false,
+    })
     const [imgSeleccionada, setImgSeleccionada] = useState("");
 
-    
     useEffect(() => {
         setSelectProduct();
         setLoading(true);
@@ -151,12 +156,50 @@ export const ProductScreen = () => {
                             similarProducts = {stateProduct.selectedProduct.similarsProducts}
                         />
                     </div>
-                    <div className = "border-t border-gray-300 mt-5">
-                        <p className = "my-5 font-semibold text-xl">Caracteristicas del producto</p> 
-                        <ProductCharacteristics 
-                            attributes = {stateProduct.selectedProduct.attributes}
-                        />
+                    <div className = "border-t border-gray-300 mt-8 flex justify-between">
+                        <button 
+                            className = {`my-5 font-semibold text-xl border-b-4 w-full pb-2 ${component.componentDescription && "border-purple-500 transition-all duration-500 ease-in-out"}`}
+                            onClick =  { () =>  setComponent({
+                                componentDescription : true,
+                                componentDevolution: false,
+                                componentCharacteristics: false,
+                            })}
+                        >Description del Producto</button> 
+                        <button 
+                            className = {`my-5 font-semibold text-xl border-b-4 w-full pb-2 ${component.componentCharacteristics && "border-purple-500 transition-all duration-500 ease-in-out"}`}
+                            onClick =  { () =>  setComponent({
+                                componentDescription : false,
+                                componentCharacteristics: true,
+                                componentDevolution: false,
+                            })}
+                        >Caracteristicas del producto</button> 
+                        <button 
+                            className = {`my-5 font-semibold text-xl border-b-4 w-full pb-2 ${component.componentDevolution && "border-purple-500 transition-all duration-500 ease-in-out"}`}
+                            onClick =  { () =>  setComponent({
+                                componentDescription : false,
+                                componentCharacteristics: false,
+                                componentDevolution: true,
+                            })}
+                        >Cambios y devoluciones</button> 
                     </div>
+                        {
+                            component.componentCharacteristics &&
+                            <ProductCharacteristics 
+                                attributes = {stateProduct.selectedProduct.attributes}
+                            />
+                        }
+                        {
+                            component.componentDescription &&
+                            <ProductDescription
+                                description = {stateProduct.selectedProduct.description}
+                            />
+                        }
+                        {
+                            component.componentDevolution &&
+                            <ProductDevolution 
+                                
+                            />
+                        }
                 </section>
             }
         </>

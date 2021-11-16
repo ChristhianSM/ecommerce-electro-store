@@ -1,39 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext} from 'react'
 import {BsSearch, BsHandbag} from 'react-icons/bs'
 import {IoCreateOutline} from 'react-icons/io5'
 import {FiUserCheck} from 'react-icons/fi'
 import {BiUserCircle, BiUser} from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import './navBar.css'
 import Logo from './../../assets/images/logo.png'
 import AuthContext from '../../context/auth/AuthContext'
-import { ShoppingCartModal } from './ShoppingCartModal'
 import ProductContext from '../../context/product/ProductContext'
+import ModalContext from '../../context/modal/ModalContext'
 
 export const NavBar = () => {
 
     const {state, startLogout} = useContext(AuthContext);
+    const {state:stateModal, changeStateModalShoppingCart} = useContext(ModalContext);
     const {state:{shoppingCart}} = useContext(ProductContext);
 
-    const [modal, setModal] = useState(false);
+    const {category} = useParams();
 
-    // UseEfecct para agregar una animacion al carrito de compras
-    const [animacionShoppingCart, setAnimacionShoppingCart] = useState(false);
-
-    useEffect(() => {
-        setAnimacionShoppingCart(true);
-        setTimeout(() => {
-            setAnimacionShoppingCart(false);
-        }, 2000);
-    }, [shoppingCart])
-
-    const handleModal = () => {
-        setModal(!modal)
+    const handleModal = () =>{
+        changeStateModalShoppingCart(true);
     }
 
     return (
-        <nav className = "bg-black fixed w-full top-0">
+        <nav className = "bg-black fixed w-full top-0 z-10">
             <div className="container mx-auto max-w-7xl py-2 flex justify-between items-center text-white">
                 <Link to = "/"> 
                     <div className="logo h-14 animate__animated animate__fadeInDown">
@@ -98,18 +89,14 @@ export const NavBar = () => {
                         
                     }
                     <div className="">
-                        <button onClick = {handleModal} className = {`flex relative ${animacionShoppingCart &&"items-center animate__animated animate__headShake"}`}>
+                      
+                        <button
+                            className = {`flex relative ${stateModal.animationsShoppingCart &&"items-center animate__animated animate__headShake"}`}
+                            onClick = {handleModal}
+                        >
                             <BsHandbag className = "text-5xl mr-2"></BsHandbag>
                             <p className = "text-center absolute -bottom-3 right-0 bg-red-500 rounded-full h-6 w-6 flex justify-center items-center">{shoppingCart.length}</p>
                         </button>
-                        {
-                            modal &&
-                            <ShoppingCartModal 
-                                modal = {modal}
-                                setModal = {setModal}
-                                className = "animate__animated animate__bounce"
-                            />
-                        }
                     </div>
                 </div>
             </div>
@@ -118,24 +105,23 @@ export const NavBar = () => {
                 <div className="container mx-auto py-4">
                     <ul className = "flex items-center justify-center text-black text-lg">
                         <Link to = "/products/laptop">
-                            <li className = "mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-blue-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white">
-                                
+                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white ${category === "laptop" && "bg-purple-500 text-white"}`}>
                                 <p className = "">Laptops</p>
                             </li>
                         </Link>
                         <Link to = "/products/tablet">
-                            <li className = "mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-blue-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white ${category === "tablet" && "bg-purple-500 text-white"}`}>
                                 Tablets
                             </li>  
                         </Link>
                         <Link to = "/products/celular">
-                            <li className = "mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-blue-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white ${category === "celular" && "bg-purple-500 text-white"}`}>
                                 
                                 Celulares
                             </li>
                         </Link>
                         <Link to = "/products/accesorios">
-                            <li className = "mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-blue-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white">
+                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white ${category === "accesorios" && "bg-purple-500 text-white"}`}>
                                 
                                 Accesorios
                             </li>

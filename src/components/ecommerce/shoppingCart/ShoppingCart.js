@@ -11,9 +11,6 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
     
     // State de la aplicacion
     const {state:statePayment, applyCouponDiscount, resetPayment} = useContext(PaymentContext);
-    const {removeProductShoppingCart} = useContext(ProductContext);
-
-    // Para simular spinner
 
     useEffect(() => {
         resetPayment();

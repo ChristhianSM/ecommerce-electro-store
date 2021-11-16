@@ -3,7 +3,7 @@ import React from 'react'
 export const ModalOrder = ({order, setIsOpen}) => {
     return (
         <>
-             <div className = "w-screen h-full fixed top-0 left-0 bg-black bg-opacity-20 flex items-center justify-center p-16">
+             <div className = "w-screen h-full fixed top-0 left-0 bg-black bg-opacity-20 flex items-center justify-center p-16 z-20">
                 <div className = "xl:w-2/6 md:3/6 bg-white relative rounded-xl p-10 text-black text-center animate__animated animate__fadeIn">
                     <div className = "border-b border-gray-300">
                         <h2 className = "text-3xl text-purple-500 font-semibold py-2">Resumen de tu orden</h2>

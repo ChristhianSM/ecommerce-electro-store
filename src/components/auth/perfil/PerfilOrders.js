@@ -1,14 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import {FaClipboardList} from 'react-icons/fa'
 import AuthContext from '../../../context/auth/AuthContext'
-import { ModalOrder } from '../../ui/modals/ModalOrder';
+import ModalContext from '../../../context/modal/ModalContext';
 
 export const PerfilOrders = () => {
 
     const {state:stateAuth, setActiveOrder} = useContext(AuthContext);
-
-    // Modal
-    const [isOpen, setIsOpen] = useState(false);
+    const {changeStateModalOrder} = useContext(ModalContext);
 
     return (
         <>
@@ -42,7 +40,7 @@ export const PerfilOrders = () => {
                                                                 className = "cursor-pointer transform transition-all ease-in duration-300 hover:scale-105"
                                                                 onClick = {() => {
                                                                     setActiveOrder(order);
-                                                                    setIsOpen(true);
+                                                                    changeStateModalOrder(true);
                                                                 }}
                                                             >
                                                                 <td className="px-6 py-4 whitespace-nowrap">
@@ -78,13 +76,7 @@ export const PerfilOrders = () => {
                 </div>
             </div>
         </div>
-        {
-            isOpen && 
-            <ModalOrder
-                order = {stateAuth.activeOrder}
-                setIsOpen = {setIsOpen}
-            />   
-        }
+        
         </>
     )
 }

@@ -1,27 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import {AiOutlineCloseCircle} from 'react-icons/ai'
-import {BiHeart} from 'react-icons/bi'
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
+
 import AuthContext from '../../../context/auth/AuthContext'
+import ModalContext from '../../../context/modal/ModalContext'
 import ProductContext from '../../../context/product/ProductContext'
 
 export const Product = ({product}) => {
     const {title, thumbnail, price, original_price, marca, type, id} = product;
 
-    // Modal
-    const [isOpen, setIsOpen] = useState(false);
-
-    function toggleModal() {
-        setIsOpen(!isOpen);
-    }
-
     // UseContext para obtener el state 
     const {addProductShoppingCart} = useContext(ProductContext);
     const {state:stateAuth,  addOrDeleteProductFavorite} = useContext(AuthContext);
+    const {changeStateModalProduct , setDataImgProduct} = useContext(ModalContext);
 
     // History para hacer el logeo
     const history = useHistory()
@@ -104,23 +98,24 @@ export const Product = ({product}) => {
                             </svg>
                             <span className="text-gray-400 whitespace-nowrap mr-3">4.60</span><span className="mr-2 text-gray-400">{marca}</span>
                             </div>
-                            <div className="flex items-center w-full justify-between min-w-0 h-28">
+                            <div className="flex items-center w-full justify-between min-w-0 h-24">
                                 <h2 className="text-lg mr-auto cursor-pointer text-black hover:text-purple-500">{title}</h2>
-                                <p className="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-lg">
-                                    INSTOCK</p>
                             </div>
                     </div>
                     <div className="text-xl text-black font-semibold my-2">S/. {price}</div>
                     <div className="flex space-x-2 text-sm font-medium justify-start">
                         <button 
-                            className="transition ease-in duration-300 inline-flex items-center text-sm font-medium mb-2 md:mb-0 bg-purple-500 px-5 py-2 hover:shadow-lg tracking-wider text-white rounded-full hover:bg-purple-600 "
+                            className="w-5/6 justify-center transition ease-in duration-300 inline-flex items-center text-sm font-medium mb-2 md:mb-0 bg-purple-500 px-5 py-2 hover:shadow-lg tracking-wider text-white rounded-lg hover:bg-purple-600 "
                             onClick = {handleAddProduct}
                         >
-                            <span>Add Cart</span>
+                            <span>Agregar</span>
                         </button>
                         <button 
-                            className="transition ease-in duration-300 bg-gray-700 hover:bg-gray-800 border hover:border-gray-500 border-gray-700 hover:text-white  hover:shadow-lg text-gray-400 rounded-full w-9 h-9 text-center p-2"
-                            onClick={toggleModal}
+                            className=" transition ease-in duration-300 bg-gray-700 hover:bg-gray-800 border hover:border-gray-500 border-gray-700 hover:text-white  hover:shadow-lg text-gray-400 rounded-full w-9 h-9 text-center p-2"
+                            onClick={ () => {
+                                changeStateModalProduct(true)
+                                setDataImgProduct(product)
+                            }}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -131,25 +126,7 @@ export const Product = ({product}) => {
                     </div>
                 </div>
             </div>
-                {
-                    isOpen &&
-                    <div className = "w-full h-full bg-black fixed top-0 left-0 flex justify-center items-center bg-opacity-70 z-10">
-                        <div className = "w-3/5 h-3/5 rounded-lg animate__animated animate__zoomIn relative bg-white p-5" >
-                            <div className = "flex justify-between items-center mb-10">
-                                <p className = "font-semibold text-2xl text-purple-500 ">{product.title}</p>
-                                <button 
-                                    type="button" 
-                                    className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                                    onClick = {() => setIsOpen(false)}
-                                >
-                                    <span class="sr-only">Close menu</span>
-                                    <AiOutlineCloseCircle className = "text-2xl "></AiOutlineCloseCircle>
-                                </button>
-                            </div>
-                            <img src={thumbnail} alt="" className = "object-contain h-4/5 mx-auto" />
-                        </div>
-                    </div>
-                }
+                
         </>
         
     )

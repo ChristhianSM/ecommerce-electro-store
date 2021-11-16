@@ -16,6 +16,7 @@ import { ShoppingCartScreen } from "../components/ecommerce/shoppingCart/Shoppin
 import AuthContext from "../context/auth/AuthContext";
 import { auth } from "../firebase/firebaseConfig";
 import { Footer } from "../components/ecommerce/Footer";
+import { Modal } from "../components/ui/Modal";
 
 export const AppRoute = () => {
 
@@ -30,7 +31,8 @@ export const AppRoute = () => {
                 }
             }
         })
-    }, [])
+    }, []);
+
     return (
         <Router>
             <div className = "bg-white h-full">
@@ -45,7 +47,9 @@ export const AppRoute = () => {
                     <Redirect to = "/"/>
                 </Switch>
             </div>
-                <Footer />
+
+            <Modal />
+            <Footer />
         </Router>
     )
 }

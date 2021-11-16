@@ -39,6 +39,7 @@ export const ShoppingCartWindow = ({setModal, modal}) => {
         }else{
             history.push("/shoppingCart");
         }
+        setModal(false);
     }
     return (
         <>

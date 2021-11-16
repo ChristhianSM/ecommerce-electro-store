@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import AuthContext from '../../../context/auth/AuthContext';
 import { useFormik} from 'formik'
 import * as Yup from 'yup'
@@ -7,8 +7,6 @@ import { SpinnerCircularFixed } from 'spinners-react';
 export const PerfilData = () => {
     
     const {state, updateDataUser} = useContext(AuthContext);
-
-    const [isOpen, setIsOpen] = useState(false);
 
     const formik = useFormik({
         initialValues : {

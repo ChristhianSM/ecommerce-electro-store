@@ -3,19 +3,50 @@ import { types } from "../../types/types"
 import ModalContext from "./ModalContext"
 import { modalReducer } from "./modalReducer"
 
-
 const ModalState = ({children}) => {
     const initialState = {
         modalShoppingCart : false,
+        animationsShoppingCart: false,
         modalOrder : false,
+        orderActive: null,
         modalImgProduct : false,
+        dataProduct : null,
     }
 
     const [state, dispatch] = useReducer(modalReducer, initialState);
 
-    const changeStateModal = () => {
+    const changeStateModalShoppingCart = (openOrClose) => {
         dispatch({
-            type: types.modalChange,
+            type: types.modalChangeShoppingCart,
+            payload : openOrClose,
+        })
+    }
+
+    const animationsModalShoppingCart = (boolean) => {
+        dispatch({
+            type: types.modalAnimationsShoppingCart,
+            payload : boolean,
+        })
+    }
+
+    const changeStateModalOrder = (openOrClose) => {
+        dispatch({
+            type: types.modalChangeOrder,
+            payload : openOrClose,
+        })
+    }
+
+    const setDataImgProduct = (product) => {
+        dispatch({
+            type: types.modalSetImgProduct,
+            payload : product,
+        })
+    }
+
+    const changeStateModalProduct = (openOrClose) => {
+        dispatch({
+            type: types.modalChangeProduct,
+            payload : openOrClose,
         })
     }
 
@@ -23,8 +54,12 @@ const ModalState = ({children}) => {
         <ModalContext.Provider
             value = {{
                 state,
-                
-                changeStateModal,
+
+                changeStateModalShoppingCart,
+                animationsModalShoppingCart,
+                changeStateModalOrder,
+                setDataImgProduct,
+                changeStateModalProduct
             }}
         >
             {children}

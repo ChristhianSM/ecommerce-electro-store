@@ -45,5 +45,9 @@ export const types = {
     uiFinishLoading : "[UI] Finish Loading",
 
     //Modals
-    modalChange : "[Modal] Set true or false Modal",
+    modalChangeShoppingCart : "[Modal] Set true or false Modal ShoppingCart",
+    modalAnimationsShoppingCart : "[Modal] Set true or false Animations ShoppingCart",
+    modalChangeOrder : "[Modal] Set true or false Modal Order",
+    modalChangeProduct : "[Modal] Set true or false Modal Img Product",
+    modalSetImgProduct : "[Modal] Set data Img Product"
 }

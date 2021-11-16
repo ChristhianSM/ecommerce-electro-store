@@ -10,7 +10,7 @@ export const ShoppingCartModal = ({setModal, modal}) => {
     })
     
   return (
-    <div className="overlay w-screen h-screen fixed top-0 left-0 text-black">
+    <div className="overlay w-screen h-screen fixed top-0 left-0 text-black z-20">
           <div className="contenedor-modal animate__animated animate__bounceInRight">
             <div className="flex flex-col max-w-3xl p-2 space-y-4 sm:p-1 sm:pb-6 bg-coolGray-50 text-coolGray-800 relative h-screen">
                 <div className = "flex justify-around">

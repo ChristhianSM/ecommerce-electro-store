@@ -1,6 +1,6 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Pagination, Navigation } from "swiper";
+import SwiperCore, { Navigation } from "swiper";
 
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
@@ -9,20 +9,20 @@ import { Product } from './Product';
 
 export const SwipperSimilarProduct = ({similarProducts}) => {
 
-    SwiperCore.use([Pagination, Navigation]);
+    SwiperCore.use([ Navigation]);
 
     return (
         <Swiper
-            slidesPerView={3}
-            spaceBetween={20}
-            slidesPerGroup={3}
+            slidesPerView={4}
+            spaceBetween={10}
+            slidesPerGroup={2}
             loop={true}
             loopFillGroupWithBlank={true}
             pagination={{
-            clickable: true
+                clickable: true
             }}
             navigation={true}
-            className="mySwiper"
+            className="mySwiper py-4"
         >   
             {
                 similarProducts.map( product => {

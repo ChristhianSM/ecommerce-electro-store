@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react'
-import { useParams } from 'react-router'
+import React, { useContext } from 'react'
 import ProductContext from '../../../context/product/ProductContext';
 import { Product } from './Product';
 
