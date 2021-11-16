@@ -97,7 +97,7 @@ export const NavBar = () => {
                         </div>
                         
                     }
-                    <div className="login ">
+                    <div className="">
                         <button onClick = {handleModal} className = {`flex relative ${animacionShoppingCart &&"items-center animate__animated animate__headShake"}`}>
                             <BsHandbag className = "text-5xl mr-2"></BsHandbag>
                             <p className = "text-center absolute -bottom-3 right-0 bg-red-500 rounded-full h-6 w-6 flex justify-center items-center">{shoppingCart.length}</p>

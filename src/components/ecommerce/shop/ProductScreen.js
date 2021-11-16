@@ -20,6 +20,7 @@ export const ProductScreen = () => {
     const [loading, setLoading] = useState(true);
     const [favorite, setFavorite] = useState(false);
     const [imgSeleccionada, setImgSeleccionada] = useState("");
+
     
     useEffect(() => {
         setSelectProduct();
@@ -27,6 +28,7 @@ export const ProductScreen = () => {
         const getSelectProduct = async () => {
             await setSelectProduct(id); 
             setLoading(false);
+            // setImgSeleccionada(stateProduct.selectedProduct.pictures[0].secure_url)
         }
         getSelectProduct();
 
@@ -39,7 +41,7 @@ export const ProductScreen = () => {
         }else{
             setFavorite(false);
         }
-    }, [stateAuth.favoritesProducts])
+    }, [id, stateAuth.favoritesProducts])
 
     const changeImg = (id) => {
         const picture = stateProduct.selectedProduct.pictures.find( img => img.id === id);

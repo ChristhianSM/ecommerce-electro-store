@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { SpinnerDotted } from 'spinners-react'
 import AuthContext from '../../context/auth/AuthContext'
-import UiContext from '../../context/loading/UiContext'
 import { NavBarAuth } from '../ui/NavBarAuth'
 import { Input } from './Input'
 
@@ -15,8 +14,6 @@ const expresiones = {
 }
 
 export const RegisterScreen = () => {
-
-    const {state:stateLoading, startLoading, finishLoading} = useContext(UiContext);
 
     const [nameInput, setNameInput] = useState({
         campo : '',
@@ -69,9 +66,7 @@ export const RegisterScreen = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        startLoading();
         startRegisterWithEmailPasswordName(emailInput.campo, passwordInput.campo, nameInput.campo, lastNameInput.campo);
-        finishLoading();
     }
 
     return (
@@ -131,13 +126,12 @@ export const RegisterScreen = () => {
 
                             <button 
                                 type="submit" 
-                                className={`w-full h-9 text-sm font-semibold mt-2 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative ${stateLoading.loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-purple-500'}`}
+                                className={`w-full h-9 text-sm font-semibold mt-2 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative bg-purple-500}`}
                             >
                                 Create Account
                                 <SpinnerDotted 
                                     className = "absolute top-2 right-3 w-full" 
                                     size={20} thickness={143} speed={101} color="rgba(255, 255, 255, 1)" 
-                                    enabled = {stateLoading.loading}
                                 />
                             </button>
                         </form>

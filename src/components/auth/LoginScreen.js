@@ -6,14 +6,12 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 import { NavBarAuth } from '../ui/NavBarAuth'
 import AuthContext from '../../context/auth/AuthContext'
-import UiContext from '../../context/loading/UiContext';
 import { SpinnerDotted } from 'spinners-react';
 
 export const LoginScreen = () => {
 
     const history = useHistory();
     const {startLoginEmailPassword, startLoginGoogle, startLoginWithFacebook, state} = useContext(AuthContext);
-    const {state:stateLoading, startLoading, finishLoading} = useContext(UiContext);
 
     useEffect(() => {
         if (state.uid) {
@@ -52,9 +50,7 @@ export const LoginScreen = () => {
                     }}
         
                     onSubmit = {async (values) => {
-                        startLoading();
                         await startLoginEmailPassword(values.email, values.password);
-                        finishLoading();
                     }}
                   >
                       {({values,errors, handleSubmit, handleChange, handleBlur, touched}) => (
@@ -95,14 +91,14 @@ export const LoginScreen = () => {
                         </div>
                         <button
                             type="submit"
-                            className={`w-full h-9  text-sm font-semibold mt-5 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative ${stateLoading.loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-purple-500'}`}
-                            disabled = {stateLoading.loading}
+                            className={`w-full h-9  text-sm font-semibold mt-5 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative 'bg-purple-500'}`}
+                            // disabled = {stateLoading.loading}
                             >
                             Login
                             <SpinnerDotted 
                                 className = "absolute top-2 right-3 w-full" 
                                 size={20} thickness={143} speed={101} color="rgba(255, 255, 255, 1)" 
-                                enabled = {stateLoading.loading}
+                                // enabled = {stateLoading.loading}
                             />
                             </button>
                         </form>

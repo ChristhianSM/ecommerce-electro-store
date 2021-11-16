@@ -1,6 +1,6 @@
 import { types } from "../../types/types";
 
-export const uiReducer = (state, action) => {
+export const modalReducer = (state, action) => {
     switch (action.type) {
         case types.uiStartLoading:
             console.log("Iniciando");

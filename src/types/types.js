@@ -43,4 +43,7 @@ export const types = {
     // Loading
     uiStartLoading : "[UI] Start Loading",
     uiFinishLoading : "[UI] Finish Loading",
+
+    //Modals
+    modalChange : "[Modal] Set true or false Modal",
 }

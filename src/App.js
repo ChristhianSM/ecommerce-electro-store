@@ -1,12 +1,12 @@
 import AuthState from "./context/auth/AuthState";
-import UiState from "./context/loading/UiState";
+import ModalState from "./context/modal/ModalState";
 import PaymentState from "./context/payment/PaymentState";
 import ProductState from "./context/product/ProductState";
 import { AppRoute } from "./routers/AppRoute";
 
 function App() {
   return (
-    <UiState>
+    <ModalState>
       <AuthState >
         <ProductState>
           <PaymentState>
@@ -14,7 +14,7 @@ function App() {
           </PaymentState>
         </ProductState>
       </AuthState>
-    </UiState>
+    </ModalState>
   );
 }
 
