@@ -68,12 +68,12 @@ export const Product = ({product}) => {
                                 isFavorite 
                                 ?
                                 <MdFavoriteBorder
-                                    className = "w-full h-7 animate__animated"
+                                    className = "w-full h-7 animate__animated text-purple-500"
                                     onClick = {handleAddOrDeleteFavoriteProduct}
                                 />
                                 :
                                 <MdFavorite
-                                    className = "w-full h-7 text-red-600 animate__animated animate__bounceIn"
+                                    className = "w-full h-7 text-purple-600 animate__animated animate__bounceIn"
                                     onClick = {handleAddOrDeleteFavoriteProduct}
                                 />
                             }
