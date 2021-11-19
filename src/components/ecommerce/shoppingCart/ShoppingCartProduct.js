@@ -81,14 +81,14 @@ export const ShoppingCartProduct = ({product}) => {
                         </button>
                         <button 
                             type="button" 
-                            className={`flex items-center px-2 py-1 space-x-1 hover:text-green-600 ${isFavorite && "text-green-400"}`}
+                            className={`flex items-center px-2 py-1 space-x-1 hover:text-purple-600 ${isFavorite && "text-purple-400"}`}
                             onClick = {() => {
                                 addOrDeleteProductFavorite(product)
                             }}
                         >   
                             {
                                 isFavorite 
-                                ? <MdFavorite className = "text-green-500"></MdFavorite> 
+                                ? <MdFavorite className = "text-purple-500"></MdFavorite> 
                                 : <MdFavoriteBorder></MdFavoriteBorder>
                             }
                             

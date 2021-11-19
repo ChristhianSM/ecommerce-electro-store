@@ -12,7 +12,7 @@ const ProductState = ({children}) => {
 
     const initialState = {
         products : [],
-        featuredProducts : [],
+        search: null,
         filters: [],
         filteredProducts : [],
         shoppingCart : getLocalStorage("ShoppingCart") || [],
@@ -25,25 +25,11 @@ const ProductState = ({children}) => {
     // Insertamos en el localStorage el carrito de compras
     setLocalStorage(state.shoppingCart)
 
-    const startLoadingProducts = async () => {
-        // Obtenemos los productos de firebase
-        const data = await getDocuments("PRODUCTS");
-
-        // Actualizamos el estado de la applicacion
-        dispatch({
-            type : types.loadProduct,
-            payload : data
-        })
-
-        const featuredProducts = data.filter(product => product.destacado);
-        dispatch({
-            type : types.loadFeaturedProducts,
-            payload : featuredProducts
-        })
-    }
-
     const loadFeaturedProducts = async () => {
-        
+        dispatch({
+            type: types.uiStartLoading
+        })
+
         // Obtenemos los productos de firebase
         const data = await getDocumentByQuery("PRODUCTS", {
             key: "destacado",
@@ -56,13 +42,18 @@ const ProductState = ({children}) => {
             type : types.loadFeaturedProducts,
             payload : data
         });
-    }
 
-    const getMarcaProducts = (products) => {
-        // const marcas = products.filter( product => )
+        dispatch({
+            type: types.uiFinishLoading
+        })
+        
     }
 
     const getProductsForCategory = async (category) => {
+        dispatch({
+            type: types.uiStartLoading
+        })
+
         // Obtenemos los productos de firebase
         const data = await getDocumentByQuery("PRODUCTS", {
             key: "type",
@@ -74,6 +65,10 @@ const ProductState = ({children}) => {
             type: types.loadProductsForCategory,
             payload: data
         })
+
+        dispatch({
+            type: types.uiFinishLoading
+        })
     }
 
     /* Funciones para el filtrado de productos */
@@ -83,21 +78,26 @@ const ProductState = ({children}) => {
             payload: filters,
         })
     }
+
     const deleteFilter = () => {
         dispatch({
             type : types.deleteFilters,
         })
     }
 
-    const getProductsForFilters = (category) => {
+    const getProductsForFilters = async (category) => {
         let products = [];
+
+        const data = await getDocuments("PRODUCTS");
+
         state.filters.forEach( marca => {
-            state.products.forEach( product => {
+            data.forEach( product => {
                 if (product.marca === marca && product.type === category) {
                     products.push(product);
                 }
             })   
         })
+        
         if (state.filters.length === 0) {
             getProductsForCategory(category)
         }else{
@@ -107,7 +107,7 @@ const ProductState = ({children}) => {
             })
         }
     }
-
+ 
     const getProductsForOrder = (products) => {
         dispatch({
             type: types.setProductsForOrder,
@@ -115,6 +115,39 @@ const ProductState = ({children}) => {
         })
     }
     
+    const getProductsForSearch = async (query) => {
+         // Obtenemos los productos de firebase
+         const data = await getDocuments("PRODUCTS");
+
+        dispatch({
+            type: types.uiStartLoading
+        })
+        const products = data.filter( product => {
+            if (product.title.toLowerCase().includes(query)) {
+                return product
+            }
+        });
+
+        dispatch({
+            type: types.setProductsForSearch,
+            payload:{
+                products,
+                query,
+            }
+        })
+
+        setTimeout(() => {
+            dispatch({
+                type: types.uiFinishLoading
+            })
+        }, 1000);
+    }
+
+    const clearSearch = () => {
+        dispatch({
+            type: types.clearSearch,
+        })
+    }
 
     /* Shopping Cart */
     const addProductShoppingCart = (product) => {
@@ -191,15 +224,13 @@ const ProductState = ({children}) => {
         }
     }
 
-
     return (
         <ProductContext.Provider
             value = {{
                 state,
 
-                startLoadingProducts,
+                // startLoadingProducts,
                 loadFeaturedProducts,
-                getMarcaProducts,
                 getProductsForCategory,
 
                 // Funciones para filtros
@@ -207,6 +238,8 @@ const ProductState = ({children}) => {
                 deleteFilter,
                 getProductsForFilters,
                 getProductsForOrder,
+                getProductsForSearch,
+                clearSearch,
 
                 // Funciones para carrito de compras
                 addProductShoppingCart,

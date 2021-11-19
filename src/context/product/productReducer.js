@@ -2,16 +2,11 @@ import { types } from "../../types/types";
 
 export const productReducer = (state, action) =>{
     switch (action.type) {
-        case types.loadProduct:
-            return {
-                ...state,
-                products : action.payload
-            }
-
+        
         case types.loadFeaturedProducts:
             return {
                 ...state,
-                featuredProducts : action.payload
+                filteredProducts : action.payload
             }
 
         case types.loadProductsForCategory:
@@ -35,6 +30,19 @@ export const productReducer = (state, action) =>{
             return {
                 ...state,
                 filteredProducts : action.payload
+            }
+
+        case types.setProductsForSearch:
+            return {
+                ...state,
+                filteredProducts : action.payload.products,
+                search : action.payload.query
+            }
+
+        case types.clearSearch:
+            return {
+                ...state,
+                search : null
             }
         
         // Shopping cart
@@ -87,6 +95,18 @@ export const productReducer = (state, action) =>{
             return {
                 ...state,
                 selectedProduct : action.payload
+            }
+
+        case types.uiStartLoading:
+            return {
+                ...state,
+                loading : true
+            }
+
+        case types.uiFinishLoading:
+            return {
+                ...state,
+                loading : false,
             }
     
         default:

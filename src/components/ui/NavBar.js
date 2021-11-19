@@ -1,5 +1,5 @@
 import React, { useContext} from 'react'
-import {BsSearch, BsHandbag} from 'react-icons/bs'
+import {BsHandbag} from 'react-icons/bs'
 import {IoCreateOutline} from 'react-icons/io5'
 import {FiUserCheck} from 'react-icons/fi'
 import {BiUserCircle, BiUser} from 'react-icons/bi'
@@ -10,6 +10,7 @@ import Logo from './../../assets/images/logo.png'
 import AuthContext from '../../context/auth/AuthContext'
 import ProductContext from '../../context/product/ProductContext'
 import ModalContext from '../../context/modal/ModalContext'
+import { InputSearch } from './InputSearch'
 
 export const NavBar = () => {
 
@@ -32,12 +33,7 @@ export const NavBar = () => {
                     </div>
                 </Link>
                 
-                <div className="search shadow-2xl flex w-1/3 animate__animated animate__fadeIn relative">
-                    <input className="w-full p-2 pl-4 outline-none rounded-lg text-black" type="text" placeholder="Search products..."/>
-                    <button className="bg-gray-500 text-white w-auto flex justify-end items-center text-lg font-bold h-full px-3 hover:text-blue-400 absolute top-0 right-0 rounded-tr-lg rounded-br-lg">
-                        <BsSearch></BsSearch>
-                    </button>
-                </div>
+                <InputSearch />
 
                 <div className="user flex justify-between items-center animate__animated animate__fadeIn">
                     {

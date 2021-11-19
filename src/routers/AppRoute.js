@@ -35,7 +35,7 @@ export const AppRoute = () => {
 
     return (
         <Router>
-            <div className = "bg-white h-full">
+            <div className = "bg-white h-full overflow-hidden">
                 <Switch>
                     <Route exact path = "/login" component = {LoginScreen}/>
                     <Route exact path = "/register" component = {RegisterScreen}/>

@@ -37,7 +37,7 @@ export const ContainerProductCategory = () => {
     return (
         <>
             <NavBar />
-            <div className="grid grid-cols-4 container mx-auto max-w-7xl py-10 gap-3 mt-48 custom right-0 left-0">
+            <div className="grid grid-cols-4 container mx-auto max-w-7xl py-10 gap-3 mt-40">
                 <div className = "col-span-4 flex justify-between items-end border-b border-gray-400 pb-3">
                     <p className = "text-xl font-semibold"> Filtrados : 
                         <span className = "bg-gray-400 rounded-lg p-2 text-lg font-light ml-3">

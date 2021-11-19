@@ -5,10 +5,10 @@ import { FeaturedProducts } from './FeaturedProducts'
 
 export const HomeScreen = () => {
 
-    const {startLoadingProducts} = useContext(ProductContext);
+    const {loadFeaturedProducts} = useContext(ProductContext);
 
     useEffect(() => {
-        startLoadingProducts();
+        loadFeaturedProducts();
     }, [])
     
     return (

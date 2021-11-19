@@ -10,7 +10,6 @@ export const types = {
     saveOrder : "[Order] Save order",
     setActiveOrder : "[Order] Set Active order",
 
-    loadProduct : "[Product] Load Products",
     loadFeaturedProducts : "[Product] Load Featured Products",
     loadProductsForCategory : "[Product] Load Products For Category",
 
@@ -20,6 +19,8 @@ export const types = {
     setFilteredProducts : "[Filters] : Set Filtered Products",
     setFilteredProductsForFilters : "[Filters] : Set Filtered Products for filters",
     setProductsForOrder : "[Filters] : Set Products For Order",
+    setProductsForSearch : "[Filters] : Set Products For Search",
+    clearSearch : "[Filters] : Clear Search",
 
     // Shopping cart
     shoppingCartAddProduct : "[Shopping Cart] Add Product Shopping Cart",

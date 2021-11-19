@@ -35,7 +35,6 @@ export const ProductContainer = () => {
         }
     }, [id, stateAuth.favoritesProducts]);
 
-
     const changeImg = (id) => {
         const picture = stateProduct.selectedProduct.pictures.find( img => img.id === id);
         setImgSeleccionada(picture.secure_url)
@@ -108,7 +107,7 @@ export const ProductContainer = () => {
 
                     <div className = "flex w-full bg-purple-500 rounded-lg border-purple-500 border-2 overflow-hidden">
                         <div 
-                            className = "w-20 p-2 bg-white" 
+                            className = "w-20 p-2 bg-white cursor-pointer" 
                             onClick = { handleFavoriteProduct}
                         >   
                             {
