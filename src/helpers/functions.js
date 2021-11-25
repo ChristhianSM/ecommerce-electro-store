@@ -65,29 +65,24 @@ export const totalToPayInCoutas = (total, numCoutas) => {
     }
 }
 
-
 // Ordenar productos por el precio maximo 
 export const orderProducts = (products, type) => {
     if (type === "menor") {
-        console.log("menor");
         products.sort( (productA, productB) => {
             if (productA.price < productB.price) return -1;
             return 1
         })
     }else if(type === "mayor") {
-        console.log("mayor");
         products.sort( (productA, productB) => {
             if (productA.price > productB.price) return -1;
             return 1
         })
     }else if (type === "marcaAsc") {
-        console.log("marcaAsc");
         products.sort( (productA, productB) => {
             if ((productA.marca).toLowerCase() < (productB.marca).toLowerCase()) return -1;
             return 1;
         })
     }else if (type === "marcaDesc") {
-        console.log("marcaDesc");
         products.sort( (productA, productB) => {
             if ((productA.marca).toLowerCase() > (productB.marca).toLowerCase()) return -1;
             return 1

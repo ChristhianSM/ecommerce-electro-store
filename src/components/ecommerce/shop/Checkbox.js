@@ -5,7 +5,7 @@ import ProductContext from '../../../context/product/ProductContext';
 export const Checkbox = ({marca}) => {
     
     const params = useParams();
-    const {state, setFilters, getProductsForFilters} = useContext(ProductContext);
+    const {state, setFilters, getProductsForFilters, getProductsForFiltersSearch} = useContext(ProductContext);
     const stateFilters = state.filters;
 
     const [checked, setChecked] = useState(false);
@@ -25,7 +25,11 @@ export const Checkbox = ({marca}) => {
             stateFilters.splice(currentIndex, 1);;           
         } 
         setFilters(stateFilters);
-        getProductsForFilters(params.category);
+        if (params.category) {
+            getProductsForFilters(params.category);
+        }else{
+            getProductsForFiltersSearch();
+        }
     }
 
     return (

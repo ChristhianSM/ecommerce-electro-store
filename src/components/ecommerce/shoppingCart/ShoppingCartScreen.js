@@ -37,7 +37,7 @@ export const ShoppingCartScreen = () => {
     return (
         <div>
             <NavBar />
-            <div className="container mx-auto max-w-7xl mt-60 custom right-0 left-0">
+            <div className="container mx-auto max-w-7xl mt-60">
                 <div className="p-5">
                     <div className="mx-4 p-4">
                         <div className="flex items-center">

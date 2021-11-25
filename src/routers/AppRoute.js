@@ -17,6 +17,7 @@ import AuthContext from "../context/auth/AuthContext";
 import { auth } from "../firebase/firebaseConfig";
 import { Footer } from "../components/ecommerce/Footer";
 import { Modal } from "../components/ui/Modal";
+import { SearchScreem } from "../components/ecommerce/shop/SearchScreem";
 
 export const AppRoute = () => {
 
@@ -44,6 +45,7 @@ export const AppRoute = () => {
                     <Route  exact path = "/shoppingCart" component = {ShoppingCartScreen}/>
                     <Route  exact path = "/products/:category" component = {ContainerProductCategory}/>
                     <Route  exact path = "/products/:category/:id" component = {ProductScreen}/>
+                    <Route  exact path = "/search/:query" component = {SearchScreem}/>
                     <Redirect to = "/"/>
                 </Switch>
             </div>

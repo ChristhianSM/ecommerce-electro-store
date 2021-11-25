@@ -55,9 +55,27 @@ export const getMarcas = async (nameCollection, {key, condition, value}) => {
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((document) => {
     // doc.data() is never undefined for query doc snapshots
-    if (!marcas.includes(document.data().marca)) {
+    if (!marcas.includes(document.data().marca) && document.data().marca !== null) {
       marcas.push(document.data().marca);
     }
   });
+  return marcas;
+}
+
+
+export const getMarcasForSearch = async (query) => {
+  let marcas = [];
+  const products =  await getDocuments("PRODUCTS");
+  const filteredProducts = products.filter( product => {
+    if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
+      return product
+    }
+  })
+
+  filteredProducts.forEach(product => {
+    if (!marcas.includes(product.marca) && product.marca !== null) {
+      marcas.push(product.marca);
+    }
+  })
   return marcas;
 }

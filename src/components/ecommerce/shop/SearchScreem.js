@@ -1,39 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import ProductContext from '../../../context/product/ProductContext'
-import { getMarcas } from '../../../firebase/firebaseData'
-import { orderProducts } from '../../../helpers/functions'
-import { Aside } from '../../ui/Aside'
-import { NavBar } from '../../ui/NavBar'
-import { ProductsCategory } from './ProductsCategory'
+import { useParams } from 'react-router';
+import ProductContext from '../../../context/product/ProductContext';
+import { getMarcasForSearch } from '../../../firebase/firebaseData';
+import { orderProducts } from '../../../helpers/functions';
+import { Aside } from '../../ui/Aside';
+import { NavBar } from '../../ui/NavBar';
+import { ProductsCategory } from './ProductsCategory';
 
-export const ContainerProductCategory = () => {
+export const SearchScreem = () => {
+
     const params = useParams();
-    const {state, getProductsForOrder, getProductsForCategory, deleteFilter} = useContext(ProductContext);
+    console.log(params);
+    const {state, getProductsForOrder, deleteFilter} = useContext(ProductContext);
 
     const [marcas, setMarcas] = useState([]);
-
     useEffect(() => {
-        getProductsForCategory(params.category, state.products);
         deleteFilter();
-
-        // Cuando carga el componente con una nueva categoria, traemos las marcas de dicha categoria
+        // Cuando carga el componente por una nueva busqueda en el parametro, traemos las marcas de dicha busqueda
         const getMarcasFirebase = async () => {
-            const marc = await getMarcas("PRODUCTS", {
-                key: "type",
-                condition : "==",
-                value: params.category
-            })
-            setMarcas(marc);
+            const marcas = await getMarcasForSearch(params.query);
+            setMarcas(marcas);
         }   
         getMarcasFirebase();
-    }, [params.category])
+
+    }, [params])
 
     const handleSelect = (e) => {
         const productosOrdenados = orderProducts(state.filteredProducts, e.target.value); 
         getProductsForOrder(productosOrdenados);               
     }
-
     return (
         <>
             <NavBar />
@@ -58,7 +53,7 @@ export const ContainerProductCategory = () => {
                     </select>
                 </div>
                 <Aside 
-                    category = {(params.category).toUpperCase()}
+                    category = {(params.query).toUpperCase()}
                     marcas = {marcas}
                 />
                 <ProductsCategory 

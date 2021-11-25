@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
+import { useHistory } from 'react-router';
 import ProductContext from '../../context/product/ProductContext';
 
 export const InputSearch = () => {
+    const history = useHistory();
     const {getProductsForSearch} = useContext(ProductContext);
 
     const [input, setInput] = useState("");
@@ -15,6 +17,7 @@ export const InputSearch = () => {
         e.preventDefault();
         getProductsForSearch(input.toLowerCase());
         setInput("")
+        history.push(`/search/${input}`)
     }
     return (
         <form 

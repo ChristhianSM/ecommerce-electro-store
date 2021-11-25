@@ -60,10 +60,10 @@ const ProductState = ({children}) => {
             condition : "==",
             value: category
         });
-
+        const products = data.filter(product => product.marca !== null);
         dispatch({
             type: types.loadProductsForCategory,
-            payload: data
+            payload: products
         })
 
         dispatch({
@@ -107,6 +107,28 @@ const ProductState = ({children}) => {
             })
         }
     }
+
+    const getProductsForFiltersSearch = async () => {
+        let products = [];
+
+        const data = await getDocuments("PRODUCTS");
+
+        state.filters.forEach( marca => {
+            data.forEach( product => {
+                if (product.marca === marca) {
+                    products.push(product);
+                }
+            })   
+        })
+        if (state.filters.length === 0) {
+            getProductsForSearch(state.search);
+        }else{
+            dispatch({
+                type: types.loadProductsForCategory,
+                payload: products
+            })
+        }
+    }
  
     const getProductsForOrder = (products) => {
         dispatch({
@@ -123,7 +145,7 @@ const ProductState = ({children}) => {
             type: types.uiStartLoading
         })
         const products = data.filter( product => {
-            if (product.title.toLowerCase().includes(query)) {
+            if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
                 return product
             }
         });
@@ -239,6 +261,7 @@ const ProductState = ({children}) => {
                 getProductsForFilters,
                 getProductsForOrder,
                 getProductsForSearch,
+                getProductsForFiltersSearch,
                 clearSearch,
 
                 // Funciones para carrito de compras
