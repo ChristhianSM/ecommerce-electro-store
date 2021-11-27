@@ -7,11 +7,9 @@ export const ProductImg = ({picture, setImgSeleccionada}) => {
     const {state:stateProduct} = useContext(ProductContext);
     const [selected, setSelected] = useState(false);
     
-    
     useEffect(() => {
         console.log(picture.secure_url);
     }, [picture.secure_url]);
-
 
     const changeImg = (id) => {
         const picture = stateProduct.selectedProduct.pictures.find( img => img.id === id);

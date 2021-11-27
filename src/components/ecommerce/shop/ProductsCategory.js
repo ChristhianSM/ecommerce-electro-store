@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import ProductContext from '../../../context/product/ProductContext';
+import { SearchEmpty } from '../../ui/SearchEmpty';
 import { SkeletonUi } from '../../ui/SkeletonUi';
 import { Product } from './Product';
 
@@ -12,15 +13,16 @@ export const ProductsCategory = () => {
                 {
                     state.loading 
                     ?   <SkeletonUi />
-                    :   state.filteredProducts &&
-                        state.filteredProducts.map( product => {
-                        return(
-                            <Product 
-                                key = {product.id}
-                                product = {product}
-                            />
-                        )
-                    })
+                    :   state.filteredProducts.length === 0 
+                        ? <SearchEmpty />
+                        : state.filteredProducts.map( product => {
+                            return(
+                                <Product 
+                                    key = {product.id}
+                                    product = {product}
+                                />
+                            )
+                        })
                 }
             </div>
         </div>

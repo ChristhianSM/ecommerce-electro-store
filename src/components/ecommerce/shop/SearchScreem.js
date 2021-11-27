@@ -1,25 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import ProductContext from '../../../context/product/ProductContext';
-import { getMarcasForSearch } from '../../../firebase/firebaseData';
+import { getCategories, getMarcasForSearch } from '../../../firebase/firebaseData';
 import { orderProducts } from '../../../helpers/functions';
-import { Aside } from '../../ui/Aside';
+import { AsideSearch } from '../../ui/AsideSearch';
 import { NavBar } from '../../ui/NavBar';
 import { ProductsCategory } from './ProductsCategory';
 
 export const SearchScreem = () => {
 
     const params = useParams();
-    console.log(params);
     const {state, getProductsForOrder, deleteFilter} = useContext(ProductContext);
 
     const [marcas, setMarcas] = useState([]);
+    const [categories, setCategories] = useState([]);
+
     useEffect(() => {
         deleteFilter();
         // Cuando carga el componente por una nueva busqueda en el parametro, traemos las marcas de dicha busqueda
         const getMarcasFirebase = async () => {
-            const marcas = await getMarcasForSearch(params.query);
+            const [marcas, categories] = await getMarcasForSearch(params.query);
             setMarcas(marcas);
+            setCategories(categories)
         }   
         getMarcasFirebase();
 
@@ -52,9 +54,10 @@ export const SearchScreem = () => {
                         <option value="marcaDesc" name = "orden">Marca Z - A &#9660;</option>
                     </select>
                 </div>
-                <Aside 
+                <AsideSearch
                     category = {(params.query).toUpperCase()}
                     marcas = {marcas}
+                    categories = {categories}
                 />
                 <ProductsCategory 
                     className = "col-span-3"

@@ -48,7 +48,7 @@ export const Modal = () => {
                                 className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                                 onClick = {() => changeStateModalProduct(false)}
                             >
-                                <span class="sr-only">Close menu</span>
+                                <span className="sr-only">Close menu</span>
                                 <AiOutlineCloseCircle className = "text-2xl "></AiOutlineCloseCircle>
                             </button>
                         </div>

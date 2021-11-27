@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import ProductContext from '../../../context/product/ProductContext';
 
-export const Checkbox = ({marca}) => {
+export const Checkbox = ({name}) => {
     
     const params = useParams();
     const {state, setFilters, getProductsForFilters, getProductsForFiltersSearch} = useContext(ProductContext);
@@ -33,17 +33,20 @@ export const Checkbox = ({marca}) => {
     }
 
     return (
-        <div className = "flex items-center my-2" key = {marca}>
+        <div className = "flex items-center my-2">
             <input 
                 type="checkbox" 
                 className = "mr-2 h-5 w-5"
-                name={marca} 
-                id={marca} 
+                name={name.name} 
+                id={name.name} 
                 onChange = {handleCheck}
-                value = {marca}
+                value = {name.name}
                 checked = {checked}
             />
-            <label htmlFor={marca} className = "text-lg">{marca}</label>
+            <label htmlFor={name.name} className = "text-lg  cursor-pointer flex justify-between w-full">
+                {name.name}
+                <span className = "bg-white w-8 text-center rounded-lg text-sm leading-loose h-8">{name.count}</span>
+            </label>
         </div>
     )
 }

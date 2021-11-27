@@ -47,6 +47,7 @@ export const getDocumentByQuery = async (nameCollection, {key, condition, value}
 // Funcion para obtener las marcas por categoria
 export const getMarcas = async (nameCollection, {key, condition, value}) => {
   let marcas = [];
+  const filteredProducts = [];
   
   const ref = collection(db, nameCollection);
 
@@ -55,16 +56,21 @@ export const getMarcas = async (nameCollection, {key, condition, value}) => {
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((document) => {
     // doc.data() is never undefined for query doc snapshots
+    filteredProducts.push(document.data());
     if (!marcas.includes(document.data().marca) && document.data().marca !== null) {
       marcas.push(document.data().marca);
     }
   });
-  return marcas;
+
+   // Obtenemos la cantidad de productos por marca
+   const countProductsMarca = getAmountProducts(marcas, filteredProducts, "marca");
+  
+  return countProductsMarca;
 }
 
-
-export const getMarcasForSearch = async (query) => {
-  let marcas = [];
+// Funcion para obtener las categorias del producto que se busco
+export const getCategories = async (query) => {
+  const categories = [];
   const products =  await getDocuments("PRODUCTS");
   const filteredProducts = products.filter( product => {
     if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
@@ -73,9 +79,63 @@ export const getMarcasForSearch = async (query) => {
   })
 
   filteredProducts.forEach(product => {
+    if (!categories.includes(product.type) && product.marca !== null) {
+      categories.push(product.type);
+    }
+  })
+
+  return categories;
+}
+
+// Funcion para obtener las marcas del producto que se busco
+export const getMarcasForSearch = async (query) => {
+  let marcas = [];
+  const categories = [];
+  const products =  await getDocuments("PRODUCTS");
+  const filteredProducts = products.filter( product => {
+    if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
+      return product
+    }
+  })
+  // obtenemos las marcas
+  filteredProducts.forEach(product => {
     if (!marcas.includes(product.marca) && product.marca !== null) {
       marcas.push(product.marca);
     }
   })
-  return marcas;
+
+  // Obtenemos las categorias
+  filteredProducts.forEach(product => {
+    if (!categories.includes(product.type) && product.marca !== null) {
+      categories.push(product.type);
+    }
+  })
+
+  // Obtenemos la cantidad de productos por marca
+  const countProductsMarca = getAmountProducts(marcas, filteredProducts, "marca");
+  const countProductsCategories = getAmountProducts(categories, filteredProducts, "type");
+
+  return [countProductsMarca, countProductsCategories];
+}
+
+const getAmountProducts = (arreglo, filteredProducts, prop) => {
+  const countProducts = []
+  if (prop === "marca") {
+    arreglo.forEach( marca => {
+      const count =  filteredProducts.filter( product => product.marca === marca);
+      countProducts.push({
+        name: marca,
+        count: count.length
+      })
+    })
+  }else{
+    arreglo.forEach( marca => {
+      const count =  filteredProducts.filter( product => product.type === marca);
+      countProducts.push({
+        name: marca,
+        count: count.length
+      })
+    })
+  }
+  return countProducts
 }

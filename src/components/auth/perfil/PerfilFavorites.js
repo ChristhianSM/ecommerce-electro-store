@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
+import { BsTrash } from 'react-icons/bs';
 import {IoHeartDislikeOutline} from 'react-icons/io5'
+import { MdOutlineAddShoppingCart } from 'react-icons/md';
 import AuthContext from '../../../context/auth/AuthContext';
 import ProductContext from '../../../context/product/ProductContext';
 
@@ -37,19 +39,25 @@ export const PerfilFavorites = ({favoritesProducts}) => {
                                     </div>
                                     <span className="text-center w-1/5 font-semibold text-sm">S./ {product.price}</span>
 
-                                    <div className = "w-1/5">
+                                    <div className = "w-1/5 flex gap-4">
                                         <button 
-                                            className="font-semibold mr-3 hover:text-red-500 text-gray-500 text-sm"
+                                            className="font-semibold mr-3 flex items-center gap-1 hover:text-red-500 text-gray-500 text-sm"
                                             onClick = {() => {
                                                 handleRemoveFavoriteProduct(product)
                                             }}
-                                        >Remove</button>
+                                        >
+                                            <BsTrash></BsTrash>
+                                            Eliminar
+                                        </button>
                                         <button 
-                                            className="font-semibold hover:text-green-500 text-gray-500 text-sm"
+                                            className="font-semibold hover:text-green-500 text-gray-500 text-sm flex items-center gap-1"
                                             onClick = {() => {
                                                 handleAddProductShoppingCart(product)
                                             }}
-                                        >Add Shopping Cart</button>
+                                        >
+                                            <MdOutlineAddShoppingCart></MdOutlineAddShoppingCart>
+                                            Agregar
+                                        </button>
                                     </div>
                                 </div>
                             )
