@@ -14,7 +14,13 @@ export const authReducer = (state, action) => {
                 name : '',
                 lastName: '',
                 email: '',
+                password : '',
+                celphone : '', 
+                document : '',
                 favoritesProducts : [],
+                orders : [],
+                activeOrder: null,
+                loading: false,
             }
 
         case types.dataUser:

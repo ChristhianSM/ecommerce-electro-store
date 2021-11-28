@@ -25,20 +25,31 @@ const AuthState = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, initialState);
     
     const startLoginEmailPassword = async (email, password) => {
-        try {
-            const {user} = await auth.signInWithEmailAndPassword(email, password);
-            dispatch({
-                type: types.login,
-                payload : {
-                    uid: user.uid,
-                    name : user.displayName
-                }
-            })
-            alertSuccessSignIn('Signed in successfully')
-            
-        } catch (error) {
-            alertErrorSignIn(error);
-        }
+        dispatch({
+            type: types.uiStartLoading
+        })
+
+        setTimeout(async () => {
+            try {
+                const {user} = await auth.signInWithEmailAndPassword(email, password);
+                dispatch({
+                    type: types.login,
+                    payload : {
+                        uid: user.uid,
+                        name : user.displayName
+                    }
+                })
+                alertSuccessSignIn('Signed in successfully');
+
+                dispatch({
+                    type: types.uiFinishLoading
+                })
+                
+            } catch (error) {
+                alertErrorSignIn(error);
+            }
+        }, 3000);
+        
     }
     
     const startLoginGoogle = () => {
@@ -68,32 +79,42 @@ const AuthState = ({children}) => {
     }
     
     const startRegisterWithEmailPasswordName = (email, password, name, lastName) => {
-        auth.createUserWithEmailAndPassword(email, password)
-            .then( async ({user}) => {
-                console.log(user);
-                await auth.currentUser.updateProfile({displayName: name})
+        dispatch({
+            type: types.uiStartLoading
+        })
+
+        setTimeout(() => {
+            auth.createUserWithEmailAndPassword(email, password)
+                .then( async ({user}) => {
+                    console.log(user);
+                    await auth.currentUser.updateProfile({displayName: name})
+    
+                    dispatch({
+                        type: types.login,
+                        payload : {
+                            uid: user.uid,
+                            name : user.displayName,
+                        }
+                    })
+    
+                    db.collection("USERS").doc(user.uid).set({
+                        name,
+                        lastName,
+                        email, 
+                        password,
+                        favoritesProducts : [],
+                        orders: [],
+                    })
+                    alertSuccessSignIn('successfully registered user');
+                    
+                }).catch( error => {
+                    alertErrorSignIn(error);
+                })
 
                 dispatch({
-                    type: types.login,
-                    payload : {
-                        uid: user.uid,
-                        name : user.displayName,
-                    }
+                    type: types.uiFinishLoading
                 })
-
-                db.collection("USERS").doc(user.uid).set({
-                    name,
-                    lastName,
-                    email, 
-                    password,
-                    favoritesProducts : [],
-                    orders: [],
-                })
-                alertSuccessSignIn('successfully registered user');
-                
-            }).catch( error => {
-                alertErrorSignIn(error);
-            })
+        }, 3000);
     }
 
     const getDataUser = (userId) => {
@@ -255,7 +276,6 @@ const AuthState = ({children}) => {
     const startLogout = () => {
         auth.signOut()
             .then( () => {
-
                 dispatch({
                     type: types.logout
                 })

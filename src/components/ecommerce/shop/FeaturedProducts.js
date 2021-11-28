@@ -13,7 +13,7 @@ export const FeaturedProducts = () => {
     }, [])
 
   return (
-    <div className="container mx-auto max-w-7xl border p-5 rounded-lg bg-gray-500 right-0 left-0 mt-48">
+    <div className="container mx-auto max-w-7xl border p-5 rounded-lg bg-gray-500 right-0 left-0 mt-5">
         {
           state.search 
           ? <div className = "text-center">

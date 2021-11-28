@@ -126,12 +126,13 @@ export const RegisterScreen = () => {
 
                             <button 
                                 type="submit" 
-                                className={`w-full h-9 text-sm font-semibold mt-2 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative bg-purple-500}`}
+                                className={`w-full h-9 text-sm  bg-purple-500 font-semibold mt-2 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative ${state.loading && "cursor-not-allowed bg-gray-500"} }`}
                             >
                                 Create Account
                                 <SpinnerDotted 
                                     className = "absolute top-2 right-3 w-full" 
-                                    size={20} thickness={143} speed={101} color="rgba(255, 255, 255, 1)" 
+                                    size={20} thickness={143} speed={101} color="rgba(255, 255, 255, 1)"
+                                    enabled = {state.loading} 
                                 />
                             </button>
                         </form>

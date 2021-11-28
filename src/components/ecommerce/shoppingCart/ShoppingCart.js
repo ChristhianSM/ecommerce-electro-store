@@ -125,13 +125,13 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                     <h3 className="font-semibold text-2xl pb-2">Resumen</h3>
                     <div className="flex justify-between mt-10 mb-3">
                        <span className="font-semibold text-sm"> Subtotal</span>
-                        <span className="font-semibold text-sm">S/. {statePayment.subtotal}</span>
+                        <span className="font-semibold text-sm">S/. {statePayment.subtotal.toFixed(2)}</span>
                     </div>
                     {
                         statePayment.couponDiscount !== 0  &&
                         <div className="flex justify-between mb-3 animate__animated animate__zoomIn">
                             <span className="font-semibold text-sm"> Descuento por cupon</span>
-                            <span className="font-semibold text-sm">S/. {statePayment.couponDiscount}</span>     
+                            <span className="font-semibold text-sm">S/. {statePayment.couponDiscount.toFixed(2)}</span>     
                         </div> 
                     } 
                 </div>
@@ -140,8 +140,8 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                         <span>Total normal</span>
                         {
                             statePayment.total 
-                            ? <span>S/. {statePayment.total}</span>
-                            : <span>S/. {statePayment.subtotal}</span>
+                            ? <span>S/. {statePayment.total.toFixed(2)}</span>
+                            : <span>S/. {statePayment.subtotal.toFixed(2)}</span>
                         }
                     </div>
 

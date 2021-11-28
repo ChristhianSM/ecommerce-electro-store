@@ -97,6 +97,7 @@ export const getMarcasForSearch = async (query) => {
       return product
     }
   })
+
   // obtenemos las marcas
   filteredProducts.forEach(product => {
     if (!marcas.includes(product.marca) && product.marca !== null) {
@@ -106,7 +107,7 @@ export const getMarcasForSearch = async (query) => {
 
   // Obtenemos las categorias
   filteredProducts.forEach(product => {
-    if (!categories.includes(product.type) && product.marca !== null) {
+    if (!categories.includes(product.type)) {
       categories.push(product.type);
     }
   })
@@ -115,7 +116,7 @@ export const getMarcasForSearch = async (query) => {
   const countProductsMarca = getAmountProducts(marcas, filteredProducts, "marca");
   const countProductsCategories = getAmountProducts(categories, filteredProducts, "type");
 
-  return [countProductsMarca, countProductsCategories];
+  return [countProductsMarca, countProductsCategories, filteredProducts];
 }
 
 const getAmountProducts = (arreglo, filteredProducts, prop) => {

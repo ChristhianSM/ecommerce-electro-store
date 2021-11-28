@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import ProductContext from '../../../context/product/ProductContext';
 
-export const Checkbox = ({name}) => {
+export const Checkbox = ({name, count}) => {
     
     const params = useParams();
     const {state, setFilters, getProductsForFilters, getProductsForFiltersSearch} = useContext(ProductContext);
@@ -41,7 +41,8 @@ export const Checkbox = ({name}) => {
                 id={name.name} 
                 onChange = {handleCheck}
                 value = {name.name}
-                checked = {checked}
+                checked = {checked || count && true}
+                disabled = {count && true}
             />
             <label htmlFor={name.name} className = "text-lg  cursor-pointer flex justify-between w-full">
                 {name.name}

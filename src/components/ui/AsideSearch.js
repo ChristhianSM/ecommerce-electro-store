@@ -19,8 +19,17 @@ export const AsideSearch = ({category, marcas, categories}) => {
                 <div className="marca my-4">
                     <h3 className = "text-lg font-bold">Categorias</h3>
                     {   
-                    
-                    categories.map( category => {
+                    categories.length === 1 
+                    ? categories.map( category => {
+                        return (
+                            <Checkbox 
+                                key = {category.name}
+                                name = {category}
+                                count = "1"
+                            />
+                        )
+                    })
+                    : categories.map( category => {
                             return (
                                 <Checkbox 
                                     key = {category.name}
@@ -34,8 +43,17 @@ export const AsideSearch = ({category, marcas, categories}) => {
                 <div className="marca my-4">
                     <h3 className = "text-lg font-bold">Marca</h3>
                     {   
-                    
-                    marcas.map( marca => {
+                    marcas.length === 1 
+                    ? marcas.map( marca => {
+                        return (
+                            <Checkbox 
+                                key = {marca.name}
+                                name = {marca}
+                                count = "1"
+                            />
+                        )
+                    })
+                    : marcas.map( marca => {
                             return (
                                 <Checkbox 
                                     key = {marca.name}

@@ -5,7 +5,7 @@ import { productReducer } from './productReducer'
 import { types } from '../../types/types';
 import { alertAddProduct } from '../../helpers/alerts';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
-import { getDocumentByQuery, getDocuments } from '../../firebase/firebaseData';
+import { getDocumentByQuery, getDocuments, getMarcasForSearch } from '../../firebase/firebaseData';
 import { getDataProductId } from '../../helpers/functions';
 
 const ProductState = ({children}) => {
@@ -108,18 +108,48 @@ const ProductState = ({children}) => {
         }
     }
 
-    const getProductsForFiltersSearch = async () => {
-        let products = [];
-
+    const getProductsForSearch = async (query) => {
+        // Obtenemos los productos de firebase
         const data = await getDocuments("PRODUCTS");
 
+       dispatch({
+           type: types.uiStartLoading
+       })
+       const products = data.filter( product => {
+           if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
+               return product
+           }
+       });
+
+       dispatch({
+           type: types.setProductsForSearch,
+           payload:{
+               products,
+               query,
+           }
+       })
+
+       setTimeout(() => {
+           dispatch({
+               type: types.uiFinishLoading
+           })
+       }, 1000);
+   }
+
+    const getProductsForFiltersSearch = async () => {
+        let products = [];
+        
+        const [,,filteredProducts] = await getMarcasForSearch(state.search);
+
         state.filters.forEach( marca => {
-            data.forEach( product => {
-                if (product.marca === marca) {
+            filteredProducts.forEach( product => {
+                if (product.marca === marca && product.marca !== null) {
                     products.push(product);
                 }
             })   
-        })
+        });
+
+        console.log(products);
         if (state.filters.length === 0) {
             getProductsForSearch(state.search);
         }else{
@@ -137,34 +167,6 @@ const ProductState = ({children}) => {
         })
     }
     
-    const getProductsForSearch = async (query) => {
-         // Obtenemos los productos de firebase
-         const data = await getDocuments("PRODUCTS");
-
-        dispatch({
-            type: types.uiStartLoading
-        })
-        const products = data.filter( product => {
-            if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
-                return product
-            }
-        });
-
-        dispatch({
-            type: types.setProductsForSearch,
-            payload:{
-                products,
-                query,
-            }
-        })
-
-        setTimeout(() => {
-            dispatch({
-                type: types.uiFinishLoading
-            })
-        }, 1000);
-    }
-
     const clearSearch = () => {
         dispatch({
             type: types.clearSearch,

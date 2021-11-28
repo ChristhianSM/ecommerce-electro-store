@@ -98,20 +98,20 @@ export const NavBar = () => {
             </div>
 
             <div className="bg-gray-300">
-                <div className="container mx-auto py-4">
+                <div className="container mx-auto py-2">
                     <ul className = "flex items-center justify-center text-black text-lg">
                         <Link to = "/products/laptop">
-                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white ${category === "laptop" && "bg-purple-500 text-white"}`}>
+                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-105 hover:text-white ${category === "laptop" && "bg-purple-500 text-white"}`}>
                                 <p className = "">Laptops</p>
                             </li>
                         </Link>
                         <Link to = "/products/tablet">
-                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white ${category === "tablet" && "bg-purple-500 text-white"}`}>
+                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-105 hover:text-white ${category === "tablet" && "bg-purple-500 text-white"}`}>
                                 Tablets
                             </li>  
                         </Link>
                         <Link to = "/products/celular">
-                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-110 hover:text-white ${category === "celular" && "bg-purple-500 text-white"}`}>
+                            <li className = {`mr-10 transition duration-500 ease-in-out p-3 rounded-xl cursor-pointer hover:bg-purple-500 transform hover:-translate-y-1 hover:scale-105 hover:text-white ${category === "celular" && "bg-purple-500 text-white"}`}>
                                 
                                 Celulares
                             </li>

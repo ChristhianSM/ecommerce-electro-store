@@ -15,9 +15,9 @@ import { ProductScreen } from "../components/ecommerce/shop/ProductScreen";
 import { ShoppingCartScreen } from "../components/ecommerce/shoppingCart/ShoppingCartScreen";
 import AuthContext from "../context/auth/AuthContext";
 import { auth } from "../firebase/firebaseConfig";
-import { Footer } from "../components/ecommerce/Footer";
 import { Modal } from "../components/ui/Modal";
 import { SearchScreem } from "../components/ecommerce/shop/SearchScreem";
+import { Footer } from "../components/ui/Footer";
 
 export const AppRoute = () => {
 
