@@ -12,6 +12,10 @@ export const ContainerProductCategory = () => {
     const {state, getProductsForOrder, getProductsForCategory, deleteFilter} = useContext(ProductContext);
 
     const [marcas, setMarcas] = useState([]);
+    const [prices, setPrices] = useState({
+        higherPrice: 0,
+        lowerPrice: 0
+    })
 
     useEffect(() => {
         getProductsForCategory(params.category, state.products);
@@ -19,12 +23,16 @@ export const ContainerProductCategory = () => {
 
         // Cuando carga el componente con una nueva categoria, traemos las marcas de dicha categoria
         const getMarcasFirebase = async () => {
-            const marc = await getMarcas("PRODUCTS", {
+            const [marc, higherPrice, lowerPrice] = await getMarcas("PRODUCTS", {
                 key: "type",
                 condition : "==",
                 value: params.category
             })
             setMarcas(marc);
+            setPrices({
+                higherPrice,
+                lowerPrice
+            })
         }   
         getMarcasFirebase();
         document.querySelector('select').value = "todos"
@@ -61,6 +69,7 @@ export const ContainerProductCategory = () => {
                 <Aside 
                     category = {(params.category).toUpperCase()}
                     marcas = {marcas}
+                    prices = {prices}
                 />
                 <ProductsCategory 
                     className = "col-span-3"

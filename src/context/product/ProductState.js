@@ -53,7 +53,6 @@ const ProductState = ({children}) => {
         dispatch({
             type: types.uiStartLoading
         })
-
         // Obtenemos los productos de firebase
         const data = await getDocumentByQuery("PRODUCTS", {
             key: "type",
@@ -116,6 +115,7 @@ const ProductState = ({children}) => {
            type: types.uiStartLoading
        })
        const products = data.filter( product => product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query))
+
        dispatch({
            type: types.setProductsForSearch,
            payload:{
@@ -162,15 +162,54 @@ const ProductState = ({children}) => {
     }
 
     // Obtener productos de acuerdo a un rango de precio
-    const getProductsForRange = async (min, max) => {
-        await getProductsForSearch(state.search);
-        const filteredProducts = state.filteredProducts.filter( product => product.price >= min && product.price <= max);
-        setTimeout(() => {
+    const getProductsForRange = async (min, max, category) => {
+
+        if (state.search) {
+            const data = await getDocuments("PRODUCTS");
+    
+           const products = data.filter( product => product.title.toLowerCase().includes(state.search) || product.marca?.toLowerCase().includes(state.search))
+    
+           dispatch({
+                type: types.uiStartLoading
+            })
+            const filteredProducts = products.filter( product => product.price >= min && product.price <= max);
+    
             dispatch({
                 type: types.setProductsForRange,
                 payload: filteredProducts
             })
-        }, 1000);
+    
+            setTimeout(() => {
+                dispatch({
+                    type: types.uiFinishLoading
+                })
+            }, 1000);
+        }if (category) {
+            
+            dispatch({
+                type: types.uiStartLoading
+            })
+    
+            // Obtenemos los productos de firebase
+            const data = await getDocumentByQuery("PRODUCTS", {
+                key: "type",
+                condition : "==",
+                value: category.toLowerCase()
+            });
+
+            const products = data.filter(product => product.marca !== null);
+            
+            const filteredProducts = products.filter( product => product.price >= min && product.price <= max);
+    
+            dispatch({
+                type: types.setProductsForRange,
+                payload: filteredProducts
+            })
+    
+            dispatch({
+                type: types.uiFinishLoading
+            })
+        }
     }
     
     const clearSearch = () => {

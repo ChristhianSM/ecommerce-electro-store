@@ -1,12 +1,9 @@
 import React from 'react'
 import {GoSettings} from 'react-icons/go'
 import { Checkbox } from '../ecommerce/shop/Checkbox';
+import { RangePrices } from './RangePrices';
 
-export const Aside = ({category, marcas}) => {
-
-    const handlePrice = () => {
-        
-    }
+export const Aside = ({category, marcas, prices}) => {
 
     return (
         <aside className = "col-span-1 animate__animated animate__fadeInLeft">
@@ -18,39 +15,29 @@ export const Aside = ({category, marcas}) => {
                     <h2 className = "text-2xl">Filtros</h2>
                 </div>
 
-                <div className="marca my-4">
+                <div className="marca my-4 ">
                     <h3 className = "text-lg font-bold">Marca</h3>
-                    {   
-                       
-                       marcas.map( (marca, index) => {
-                            return (
-                                <Checkbox 
-                                    key = {index}
-                                    name = {marca}
-                                />
-                            )
-                        })
-                    }
+                    <div className = "overflow-y-auto max-h-52 style-1">
+                        {   
+                        
+                        marcas.map( (marca, index) => {
+                                return (
+                                    <Checkbox 
+                                        key = {index}
+                                        name = {marca}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-                <form className="precio" onSubmit = {handlePrice}>
-                    <h3 className = "text-lg font-bold">Precio</h3>
-                    <p className = "my-4">Selecciona un rango de precio para filtrar tu búsqueda.</p>
-                    <div className = "flex gap-2">
-                        <label htmlFor="minPrice" className = "font-medium w-28"> Precio Minimo</label>
-                        <input 
-                            type="number" 
-                            className = "outline-none border-gray-400 border w-24 px-4 rounded-md"
-                            min = "0"
-                        />
-                    </div>
-                    <div className = "flex gap-2 mt-2">
-                        <label htmlFor="minPrice" className = "font-medium w-28"> Precio Maximo</label>
-                        <input 
-                            type="number" 
-                            className = "outline-none border-gray-400 border w-24 px-4 rounded-md "
-                        />
-                    </div>
-                </form>
+                {  
+                    prices.lowerPrice > 0 &&
+                    <RangePrices 
+                        prices = {prices}
+                        category = {category}
+                    />
+                }
             </div>    
         </aside>
     )

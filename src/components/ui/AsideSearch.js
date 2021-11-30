@@ -41,28 +41,31 @@ export const AsideSearch = ({category, marcas, categories, prices}) => {
 
                 <div className="marca my-4">
                     <h3 className = "text-lg font-bold">Marca</h3>
-                    {   
-                    marcas.length === 1 
-                    ? marcas.map( marca => {
-                        return (
-                            <Checkbox 
-                                key = {marca.name}
-                                name = {marca}
-                                count = "1"
-                            />
-                        )
-                    })
-                    : marcas.map( marca => {
+                    <div className = "overflow-y-auto max-h-48 style-1">
+                        {   
+                        marcas.length === 1 
+                        ? marcas.map( marca => {
                             return (
                                 <Checkbox 
                                     key = {marca.name}
                                     name = {marca}
+                                    count = "1"
                                 />
                             )
                         })
-                    }
+                        : marcas.map( marca => {
+                                return (
+                                    <Checkbox 
+                                        key = {marca.name}
+                                        name = {marca}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
                 {  
+                    prices.lowerPrice > 0 &&
                     <RangePrices 
                         prices = {prices}
                     />

@@ -33,7 +33,7 @@ export const Checkbox = ({name, count}) => {
     }
 
     return (
-        <div className = "flex items-center my-2">
+        <div className = "flex items-center my-2 mr-2">
             <input 
                 type="checkbox" 
                 className = "mr-2 h-5 w-5"

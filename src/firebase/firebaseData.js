@@ -41,7 +41,6 @@ export const getDocumentByQuery = async (nameCollection, {key, condition, value}
         id : document.id
       }]
   });
-
   return data;
 }
 
@@ -65,8 +64,12 @@ export const getMarcas = async (nameCollection, {key, condition, value}) => {
 
    // Obtenemos la cantidad de productos por marca
    const countProductsMarca = getAmountProducts(marcas, filteredProducts, "marca");
+
+  //  Obtenemos el precio maximo y minimo 
+  const higherPrice = getHigherOrlowerPrice("mayor", filteredProducts)
+  const lowerPrice = getHigherOrlowerPrice("menor", filteredProducts)
   
-  return countProductsMarca;
+  return [countProductsMarca,higherPrice, lowerPrice];
 }
 
 // Funcion para obtener las categorias del producto que se busco

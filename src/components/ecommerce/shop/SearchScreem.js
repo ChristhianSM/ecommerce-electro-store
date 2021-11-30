@@ -29,7 +29,7 @@ export const SearchScreem = () => {
             setPrices({
                 higherPrice,
                 lowerPrice
-            })
+            }) 
         }   
         getMarcasFirebase();
 

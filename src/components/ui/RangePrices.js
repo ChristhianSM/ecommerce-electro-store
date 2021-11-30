@@ -3,27 +3,37 @@ import {Range , getTrackBackground} from 'react-range'
 import ProductContext from '../../context/product/ProductContext';
 import { getProductsForRange } from '../../helpers/functions';
 
-export const RangePrices = ({prices}) => {
+export const RangePrices = ({prices, category}) => {
 
     const {getProductsForRange} = useContext(ProductContext);
 
+    const [isMove, setIsMove] = useState(false);
+
     const STEP = 1;
     const MIN = prices.lowerPrice;
-    const MAX = 10000;
-    const [values, setValues] = useState([prices.lowerPrice, MAX]);
+    const MAX = prices.higherPrice;
+    const [values, setValues] = useState([MIN, MAX]);
 
     return (
         <div className = "mt-5">
             <h3 className = "text-lg font-bold">Precios</h3>
-            <h2 className = "text-center">Precio Minimo</h2>
+            <div className = "flex justify-between mt-3 text-purple-600 font-semibold text-sm text-center">
+                <div className = "">
+                    <p>Minimo</p>
+                    <p className = "text-center">S/. {values[0]}</p>
+                </div>
+                <div>
+                    <p>Maximo</p>
+                    <p className = "text-center">S/. {values[1]}</p>
+                </div>
+            </div>
             <Range
                 values={values}
                 step={STEP}
                 min={MIN}
                 max={MAX}
                 onChange={values => {
-                    setValues(values);
-                    
+                    setValues(values);  
                 }}
                 renderTrack={({ props, children }) => (
                 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -31,19 +41,19 @@ export const RangePrices = ({prices}) => {
                     onMouseDown={props.onMouseDown}
                     onTouchStart={props.onTouchStart}
                     onMouseUp = {() => {
-                        getProductsForRange(values[0], values[1])
+                        setIsMove(true);
                     }}
                     style={{
-                    ...props.style,
-                    height: "36px",
-                    display: "flex",
-                    width: "100%"
+                        ...props.style,
+                        height: "36px",
+                        display: "flex",
+                        width: "100%"
                     }}
                 >
                     <div
                     ref={props.ref}
                     style={{
-                        height: "3px",
+                        height: "5px",
                         width: "100%",
                         borderRadius: "50px",
                         background: getTrackBackground({
@@ -78,14 +88,20 @@ export const RangePrices = ({prices}) => {
                     style={{
                         height: "16px",
                         width: "5px",
-                        backgroundColor: isDragged ? "#548BF4" : "#CCC"
+                        backgroundColor: isDragged ? "#548BF4" : "#cccccc"
                     }}
                     />
                 </div>
                 )}
             />
-            <p className = "text-center border rounded-lg">S/. {values[0]}</p>
-            <p className = "text-center border rounded-lg">S/. {values[1]}</p>
+            <button 
+                className = {`text-center mx-auto block border  px-5 py-2 mt-2 rounded-lg text-white ${isMove ? "bg-purple-500" : "bg-gray-500 text-black cursor-not-allowed"}`}
+                onClick = {() => {
+                    getProductsForRange(values[0], values[1], category);
+                }}
+            >
+                Filtrar por precio
+            </button>
         </div>
     )
 }
