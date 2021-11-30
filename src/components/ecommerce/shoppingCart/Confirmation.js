@@ -93,10 +93,6 @@ export const Confirmation = ({shoppingCart}) => {
                         {statePayment.total !== 0 ? statePayment.total : statePayment.subtotal}
                     </p>
                 </div>
-                {/* <div className = "flex justify-between items-center border-t border-gray-300 p-2">
-                    <p className = "ml-5 font-bold text-lg">Total : </p>
-                    <p className = "mr-5 text-xl font-bold">S/. {total}</p>
-                </div> */}
                 <button className = "mt-6 w-full border flex gap-2 items-center border-purple-500 p-3 rounded-lg text-white font-semibold bg-purple-500 hover:bg-purple-600 justify-center"
                     onClick = { () => {
                         setIsOpen(true);
@@ -106,7 +102,6 @@ export const Confirmation = ({shoppingCart}) => {
                     Confirmar y comprar
                 </button>
             </div>
-            
             {
                 isOpen && <ModalConfirmation />
             }

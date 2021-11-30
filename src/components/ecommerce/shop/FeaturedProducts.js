@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-// import { SpinnerCircular, SpinnerDotted } from "spinners-react";
 import ProductContext from "../../../context/product/ProductContext";
 import { SkeletonUi } from "../../ui/SkeletonUi";
 import { Product } from "./Product";

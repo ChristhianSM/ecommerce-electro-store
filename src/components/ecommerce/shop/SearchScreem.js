@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import ProductContext from '../../../context/product/ProductContext';
-import { getCategories, getMarcasForSearch } from '../../../firebase/firebaseData';
+import { getMarcasForSearch } from '../../../firebase/firebaseData';
 import { orderProducts } from '../../../helpers/functions';
 import { AsideSearch } from '../../ui/AsideSearch';
 import { NavBar } from '../../ui/NavBar';
@@ -14,14 +14,22 @@ export const SearchScreem = () => {
 
     const [marcas, setMarcas] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [prices, setPrices] = useState({
+        higherPrice: 0,
+        lowerPrice: 0
+    })
 
     useEffect(() => {
         deleteFilter();
         // Cuando carga el componente por una nueva busqueda en el parametro, traemos las marcas de dicha busqueda
         const getMarcasFirebase = async () => {
-            const [marcas, categories] = await getMarcasForSearch(params.query);
+            const [marcas, categories, , higherPrice, lowerPrice] = await getMarcasForSearch(params.query);
             setMarcas(marcas);
             setCategories(categories)
+            setPrices({
+                higherPrice,
+                lowerPrice
+            })
         }   
         getMarcasFirebase();
 
@@ -58,6 +66,7 @@ export const SearchScreem = () => {
                     category = {(params.query).toUpperCase()}
                     marcas = {marcas}
                     categories = {categories}
+                    prices = {prices}
                 />
                 <ProductsCategory 
                     className = "col-span-3"

@@ -46,16 +46,16 @@ export const Footer = () => {
                 <div className = "w-1/6">
                     <p className = "font-bold text-lg">Siguenos en nuestras redes sociales:</p>
                     <div className = "mt-5 flex justify-between">
-                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank">
+                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank" rel="noreferrer">
                             <FaFacebook className = "text-4xl"></FaFacebook>
                         </a>
-                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank">
+                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank" rel="noreferrer">
                             <FaInstagram className = "text-4xl cursor-pointer"></FaInstagram>
                         </a>
-                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank">
+                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank" rel="noreferrer">
                             <FaLinkedin className = "text-4xl cursor-pointer"></FaLinkedin>
                         </a>
-                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank">
+                        <a href="https://www.facebook.com/sagitario142/" className = "cursor-pointer" target = "_blank" rel="noreferrer">
                             <FaYoutube className = "text-4xl cursor-pointer"></FaYoutube>
                         </a>
                     </div>

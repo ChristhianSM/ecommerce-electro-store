@@ -90,3 +90,20 @@ export const orderProducts = (products, type) => {
     }
     return (products);
 }
+
+// Obtener el mayor o menor precio
+export const getHigherOrlowerPrice = (type, products) => {
+    if (type === "mayor") {
+        const max = products.reduce((prev, current) => {
+            return (prev.price > current.price) ? prev : current
+        }, 0)
+        return(max.price);
+    }else{
+        const max = products.reduce((prev, current) => {
+            return (prev.price < current.price) ? prev : current
+        }, 0)
+        return (max.price);
+    }
+}
+
+

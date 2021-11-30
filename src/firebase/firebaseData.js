@@ -1,4 +1,5 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { getHigherOrlowerPrice } from "../helpers/functions";
 import { db } from "./firebaseConfig";
 
 export const getDataUser = async () => {
@@ -72,11 +73,7 @@ export const getMarcas = async (nameCollection, {key, condition, value}) => {
 export const getCategories = async (query) => {
   const categories = [];
   const products =  await getDocuments("PRODUCTS");
-  const filteredProducts = products.filter( product => {
-    if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
-      return product
-    }
-  })
+  const filteredProducts = products.filter( product => product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query))
 
   filteredProducts.forEach(product => {
     if (!categories.includes(product.type) && product.marca !== null) {
@@ -92,11 +89,7 @@ export const getMarcasForSearch = async (query) => {
   let marcas = [];
   const categories = [];
   const products =  await getDocuments("PRODUCTS");
-  const filteredProducts = products.filter( product => {
-    if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
-      return product
-    }
-  })
+  const filteredProducts = products.filter( product => product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query))
 
   // obtenemos las marcas
   filteredProducts.forEach(product => {
@@ -116,7 +109,11 @@ export const getMarcasForSearch = async (query) => {
   const countProductsMarca = getAmountProducts(marcas, filteredProducts, "marca");
   const countProductsCategories = getAmountProducts(categories, filteredProducts, "type");
 
-  return [countProductsMarca, countProductsCategories, filteredProducts];
+  // Obtenemos el mauor y menor precio de los productos filtrados
+  const higherPrice = getHigherOrlowerPrice("mayor", filteredProducts)
+  const lowerPrice = getHigherOrlowerPrice("menor", filteredProducts);
+
+  return [countProductsMarca, countProductsCategories, filteredProducts, higherPrice, lowerPrice];
 }
 
 const getAmountProducts = (arreglo, filteredProducts, prop) => {

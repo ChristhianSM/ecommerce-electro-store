@@ -17,7 +17,6 @@ export const ModalImgProduct = ({isOpen, closeModal}) => {
     return (
         <div>
             <Modal 
-                
                 isOpen = { isOpen } 
                 onRequestClose = { closeModal } 
                 style = { customStyles } 

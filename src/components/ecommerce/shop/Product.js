@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, Suspense, lazy } from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md'
 import { useHistory } from 'react-router'

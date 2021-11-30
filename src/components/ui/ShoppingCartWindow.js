@@ -90,7 +90,7 @@ export const ShoppingCartWindow = ({setModal, modal}) => {
                         <p className = "font-bold mt-3 text-base text-purple-600">Tu carrito de compras esta vacio :C</p>
                     </div>
                     <button 
-                        className="px-6 py-2 border rounded-md bg-purple-600 text-white absolute bottom-6 w-full" 
+                        className="px-6 py-2 border rounded-md bg-purple-600 text-white w-full" 
                         onClick = {() => {
                             setModal(!modal)
                         }}

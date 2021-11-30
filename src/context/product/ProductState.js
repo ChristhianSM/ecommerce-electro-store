@@ -115,12 +115,7 @@ const ProductState = ({children}) => {
        dispatch({
            type: types.uiStartLoading
        })
-       const products = data.filter( product => {
-           if (product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query)) {
-               return product
-           }
-       });
-
+       const products = data.filter( product => product.title.toLowerCase().includes(query) || product.marca?.toLowerCase().includes(query))
        dispatch({
            type: types.setProductsForSearch,
            payload:{
@@ -149,7 +144,6 @@ const ProductState = ({children}) => {
             })   
         });
 
-        console.log(products);
         if (state.filters.length === 0) {
             getProductsForSearch(state.search);
         }else{
@@ -165,6 +159,18 @@ const ProductState = ({children}) => {
             type: types.setProductsForOrder,
             payload : products
         })
+    }
+
+    // Obtener productos de acuerdo a un rango de precio
+    const getProductsForRange = async (min, max) => {
+        await getProductsForSearch(state.search);
+        const filteredProducts = state.filteredProducts.filter( product => product.price >= min && product.price <= max);
+        setTimeout(() => {
+            dispatch({
+                type: types.setProductsForRange,
+                payload: filteredProducts
+            })
+        }, 1000);
     }
     
     const clearSearch = () => {
@@ -264,6 +270,7 @@ const ProductState = ({children}) => {
                 getProductsForOrder,
                 getProductsForSearch,
                 getProductsForFiltersSearch,
+                getProductsForRange,
                 clearSearch,
 
                 // Funciones para carrito de compras

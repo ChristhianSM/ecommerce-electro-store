@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {BsFillCartXFill} from 'react-icons/bs'
 import {IoTicketOutline} from 'react-icons/io5'
 import PaymentContext from '../../../context/payment/PaymentContext';
-import ProductContext from '../../../context/product/ProductContext';
 import { SpinnerCircularFixed } from 'spinners-react';
 import { ShoppingCartProduct } from './ShoppingCartProduct';
 

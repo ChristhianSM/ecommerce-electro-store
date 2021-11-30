@@ -53,12 +53,22 @@ export const ShoppingCartFavoritesWindow = ({setModal, modal}) => {
                         <IoHeartDislikeOutline className = "text-8xl text-purple-600 mx-auto mb-4"></IoHeartDislikeOutline>
                         <p className = "w-1/2 text-purple-600 font-bold mb-4">Inicia sesión para agregar tus productos a favoritos</p>
                         <Link to = "/login">
-                            <button className="px-6 py-2 border rounded-md bg-purple-600 text-white hover:bg-purple-700 mb-4">Inicia Sesión</button>
+                            <button 
+                                className="px-6 py-2 border rounded-md bg-purple-600 text-white hover:bg-purple-700 mb-4"
+                                onClick = {() => {
+                                    setModal(!modal)
+                                }} 
+                            >Inicia Sesión</button>
                         </Link>
                         <p className = "text-purple-600 font-semibold">
                             ¿No estás registrado? 
                             <Link to = "/register">
-                                <span className = "underline text-gray-600 cursor-pointer"> Hazlo aquí </span>
+                                <span 
+                                    className = "underline text-gray-600 cursor-pointer"
+                                    onClick = {() => {
+                                        setModal(!modal)
+                                    }} 
+                                > Hazlo aquí </span>
                             </Link>
                         </p>
                     </div>

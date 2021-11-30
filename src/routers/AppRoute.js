@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect, 
 } from "react-router-dom";
 
 import { LoginScreen } from "../components/auth/LoginScreen";
@@ -18,10 +18,11 @@ import { auth } from "../firebase/firebaseConfig";
 import { Modal } from "../components/ui/Modal";
 import { SearchScreem } from "../components/ecommerce/shop/SearchScreem";
 import { Footer } from "../components/ui/Footer";
+import PageNavigationListener from "../components/ui/PageNavigationListener";
 
 export const AppRoute = () => {
 
-    const {login, getDataUser} = useContext(AuthContext)
+    const {login, getDataUser} = useContext(AuthContext);
 
     useEffect(() => {
         auth.onAuthStateChanged( user => {
@@ -36,6 +37,7 @@ export const AppRoute = () => {
 
     return (
         <Router>
+            <PageNavigationListener />
             <div className = "bg-white h-full overflow-hidden">
                 <Switch>
                     <Route exact path = "/login" component = {LoginScreen}/>

@@ -4,7 +4,6 @@ import { useParams } from 'react-router'
 
 import { NavBar } from '../../ui/NavBar'
 import ProductContext from '../../../context/product/ProductContext'
-import AuthContext from '../../../context/auth/AuthContext'
 import { ProductContainer } from './ProductContainer'
 
 export const ProductScreen = () => {

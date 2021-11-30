@@ -41,7 +41,7 @@ export const Checkbox = ({name, count}) => {
                 id={name.name} 
                 onChange = {handleCheck}
                 value = {name.name}
-                checked = {checked || count && true}
+                checked = {checked || (count && true)}
                 disabled = {count && true}
             />
             <label htmlFor={name.name} className = "text-lg  cursor-pointer flex justify-between w-full">

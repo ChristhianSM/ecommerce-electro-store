@@ -20,6 +20,7 @@ export const types = {
     setFilteredProductsForFilters : "[Filters] : Set Filtered Products for filters",
     setProductsForOrder : "[Filters] : Set Products For Order",
     setProductsForSearch : "[Filters] : Set Products For Search",
+    setProductsForRange : "[Filters]: Set products for Range",
     clearSearch : "[Filters] : Clear Search",
 
     // Shopping cart

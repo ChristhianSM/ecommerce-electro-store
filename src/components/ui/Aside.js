@@ -22,10 +22,10 @@ export const Aside = ({category, marcas}) => {
                     <h3 className = "text-lg font-bold">Marca</h3>
                     {   
                        
-                       marcas.map( marca => {
+                       marcas.map( (marca, index) => {
                             return (
                                 <Checkbox 
-                                    key = {marcas.name}
+                                    key = {index}
                                     name = {marca}
                                 />
                             )

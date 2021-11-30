@@ -39,6 +39,12 @@ export const productReducer = (state, action) =>{
                 search : action.payload.query
             }
 
+        case types.setProductsForRange:
+            return {
+                ...state,
+                filteredProducts : action.payload,
+            }
+
         case types.clearSearch:
             return {
                 ...state,

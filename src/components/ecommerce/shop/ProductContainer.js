@@ -14,9 +14,8 @@ export const ProductContainer = () => {
     const {id} = useParams();
 
     // UseContext para obtener el state 
-    const {state:stateProduct, addProductShoppingCart, setSelectProduct} = useContext(ProductContext);
+    const {state:stateProduct, addProductShoppingCart} = useContext(ProductContext);
     const {state:stateAuth,  addOrDeleteProductFavorite} = useContext(AuthContext);
-
 
     const [favorite, setFavorite] = useState(false);
     const [component, setComponent] = useState({

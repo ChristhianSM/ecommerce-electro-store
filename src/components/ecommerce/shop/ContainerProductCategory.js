@@ -27,6 +27,7 @@ export const ContainerProductCategory = () => {
             setMarcas(marc);
         }   
         getMarcasFirebase();
+        document.querySelector('select').value = "todos"
     }, [params.category])
 
     const handleSelect = (e) => {

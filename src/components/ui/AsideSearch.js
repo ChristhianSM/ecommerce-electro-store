@@ -1,11 +1,10 @@
 import React from 'react'
 import {GoSettings} from 'react-icons/go'
 import { Checkbox } from '../ecommerce/shop/Checkbox';
+import { RangePrices } from './RangePrices';
 
-export const AsideSearch = ({category, marcas, categories}) => {
-    const handlePrice = () => {
-        
-    }
+export const AsideSearch = ({category, marcas, categories, prices}) => {
+
     return (
         <aside className = "col-span-1 animate__animated animate__fadeInLeft">
             <h2 className = "font-bold text-xl bg-gray-300 p-3 border-l-8 border-purple-600">Tu busqueda : "{category}"</h2>
@@ -63,25 +62,12 @@ export const AsideSearch = ({category, marcas, categories}) => {
                         })
                     }
                 </div>
-                <form className="precio" onSubmit = {handlePrice}>
-                    <h3 className = "text-lg font-bold">Precio</h3>
-                    <p className = "my-4">Selecciona un rango de precio para filtrar tu búsqueda.</p>
-                    <div className = "flex gap-2">
-                        <label htmlFor="minPrice" className = "font-medium w-28"> Precio Minimo</label>
-                        <input 
-                            type="number" 
-                            className = "outline-none border-gray-400 border w-24 px-4 rounded-md"
-                            min = "0"
-                        />
-                    </div>
-                    <div className = "flex gap-2 mt-2">
-                        <label htmlFor="minPrice" className = "font-medium w-28"> Precio Maximo</label>
-                        <input 
-                            type="number" 
-                            className = "outline-none border-gray-400 border w-24 px-4 rounded-md "
-                        />
-                    </div>
-                </form>
+                {  
+                    <RangePrices 
+                        prices = {prices}
+                    />
+                }
+                
             </div>    
     </aside>
     )
