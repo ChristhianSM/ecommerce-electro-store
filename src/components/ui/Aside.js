@@ -4,7 +4,6 @@ import { Checkbox } from '../ecommerce/shop/Checkbox';
 import { RangePrices } from './RangePrices';
 
 export const Aside = ({category, marcas, prices}) => {
-
     return (
         <aside className = "col-span-1 animate__animated animate__fadeInLeft">
             <h2 className = "font-bold text-3xl bg-gray-300 p-3 border-l-8 border-purple-600">{category}</h2>

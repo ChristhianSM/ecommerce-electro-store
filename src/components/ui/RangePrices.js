@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext,useState } from 'react'
 import {Range , getTrackBackground} from 'react-range'
 import ProductContext from '../../context/product/ProductContext';
-import { getProductsForRange } from '../../helpers/functions';
 
 export const RangePrices = ({prices, category}) => {
 
