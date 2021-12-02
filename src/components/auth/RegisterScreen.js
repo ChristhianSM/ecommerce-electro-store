@@ -66,7 +66,7 @@ export const RegisterScreen = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        startRegisterWithEmailPasswordName(emailInput.campo, passwordInput.campo, nameInput.campo, lastNameInput.campo);
+        startRegisterWithEmailPasswordName(emailInput.campo, passwordInput.campo, nameInput.campo);
     }
 
     return (
@@ -87,7 +87,7 @@ export const RegisterScreen = () => {
                                 state = {nameInput}
                                 changeState = {setNameInput}
                             />
-                            <Input 
+                            {/* <Input 
                                 type = "text"
                                 name = "Apellido"
                                 placeholder = "Apellidos"
@@ -95,7 +95,7 @@ export const RegisterScreen = () => {
                                 expresionRegular = {expresiones.nombre}
                                 state = {lastNameInput}
                                 changeState = {setlastNameInput}
-                            />
+                            /> */}
                             <Input 
                                 type = "email"
                                 name = "email"

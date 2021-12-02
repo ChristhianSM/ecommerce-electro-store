@@ -32,7 +32,6 @@ const AuthState = ({children}) => {
         setTimeout(async () => {
             try {
                 const {user} = await auth.signInWithEmailAndPassword(email, password);
-                console.log(user);
                 dispatch({
                     type: types.login,
                     payload : {
@@ -60,7 +59,6 @@ const AuthState = ({children}) => {
     const startLoginGoogle = () => {
         auth.signInWithPopup(googleAuthProvider)
             .then(({user} )=> {
-                console.log(user)
                 dispatch({
                     type : types.login,
                     payload : {
@@ -83,7 +81,6 @@ const AuthState = ({children}) => {
     const startLoginWithFacebook = () => {
         auth.signInWithPopup(facebookAtuhProvider)
             .then(({user} )=> {
-                console.log(user);
                 dispatch({
                     type : types.login,
                     payload : {
@@ -103,7 +100,7 @@ const AuthState = ({children}) => {
             })
     }
     
-    const startRegisterWithEmailPasswordName = (email, password, name, lastName) => {
+    const startRegisterWithEmailPasswordName = (email, password, name) => {
         dispatch({
             type: types.uiStartLoading
         })
@@ -111,7 +108,6 @@ const AuthState = ({children}) => {
         setTimeout(() => {
             auth.createUserWithEmailAndPassword(email, password)
                 .then( async ({user}) => {
-                    console.log(user);
                     await auth.currentUser.updateProfile({displayName: name})
     
                     dispatch({
@@ -124,7 +120,7 @@ const AuthState = ({children}) => {
     
                     db.collection("USERS").doc(user.uid).set({
                         name,
-                        lastName,
+                        lastName : '',
                         email, 
                         password,
                         favoritesProducts : [],
