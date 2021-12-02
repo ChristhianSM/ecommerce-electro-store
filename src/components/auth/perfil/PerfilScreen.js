@@ -37,12 +37,14 @@ export const PerfilScreen = () => {
                     <PerfilAside 
                         setStateComponent = {setStateComponent}
                         stateComponent = {stateComponent}
+                        state = {state}
                     />
                     {
                         stateComponent.perfilData && <PerfilData />
                     }
+                    
                     {
-                        stateComponent.perfilPassword && <PerfilPassword />
+                        stateComponent.perfilPassword && state.autentication && <PerfilPassword />
                     }
                     {
                         stateComponent.perfilFavorites && 

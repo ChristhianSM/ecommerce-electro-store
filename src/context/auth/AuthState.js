@@ -32,6 +32,7 @@ const AuthState = ({children}) => {
         setTimeout(async () => {
             try {
                 const {user} = await auth.signInWithEmailAndPassword(email, password);
+                console.log(user);
                 dispatch({
                     type: types.login,
                     payload : {
@@ -47,6 +48,10 @@ const AuthState = ({children}) => {
                 
             } catch (error) {
                 alertErrorSignIn(error);
+            } finally {
+                dispatch({
+                    type: types.uiFinishLoading
+                })
             }
         }, 3000);
         
@@ -55,6 +60,7 @@ const AuthState = ({children}) => {
     const startLoginGoogle = () => {
         auth.signInWithPopup(googleAuthProvider)
             .then(({user} )=> {
+                console.log(user)
                 dispatch({
                     type : types.login,
                     payload : {
@@ -62,18 +68,37 @@ const AuthState = ({children}) => {
                         name : user.displayName
                     }
                 })
+
+                db.collection("USERS").doc(user.uid).set({
+                    name : user.displayName,
+                    lastName : "",
+                    email: user.email, 
+                    password : "",
+                    favoritesProducts : [],
+                    orders: [],
+                })
             })
     }
 
     const startLoginWithFacebook = () => {
         auth.signInWithPopup(facebookAtuhProvider)
             .then(({user} )=> {
+                console.log(user);
                 dispatch({
                     type : types.login,
                     payload : {
                         uid : user.uid,
                         name : user.displayName
                     }
+                })
+
+                db.collection("USERS").doc(user.uid).set({
+                    name : user.displayName,
+                    lastName : "",
+                    email: user.email, 
+                    password : "",
+                    favoritesProducts : [],
+                    orders: [],
                 })
             })
     }
@@ -104,6 +129,7 @@ const AuthState = ({children}) => {
                         password,
                         favoritesProducts : [],
                         orders: [],
+                        autentication:true,
                     })
                     alertSuccessSignIn('successfully registered user');
                     
