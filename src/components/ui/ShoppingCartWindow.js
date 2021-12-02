@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {BsFillCartXFill} from 'react-icons/bs'
-import {useHistory} from 'react-router-dom'
+import {useHistory, } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import AuthContext from '../../context/auth/AuthContext';
 import ProductContext from '../../context/product/ProductContext';
@@ -33,11 +33,11 @@ export const ShoppingCartWindow = ({setModal, modal}) => {
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    history.push("auth/login")
+                    history.replace("/auth/login")
                 }
               })    
         }else{
-            history.push("/shoppingCart");
+            history.replace("/shoppingCart");
         }
         setModal(false);
     }
