@@ -77,7 +77,7 @@ export const ShoppingCartProduct = ({product}) => {
                         >
                             <GrTrash className = "text-base"></GrTrash>
                             
-                            <span>Remove</span>
+                            <span>Eliminar</span>
                         </button>
                         <button 
                             type="button" 
@@ -92,7 +92,7 @@ export const ShoppingCartProduct = ({product}) => {
                                 : <MdFavoriteBorder></MdFavoriteBorder>
                             }
                             
-                            <span>Add to favorites</span>
+                            <span>Agregar a favoritos</span>
                         </button>
                     </div>
                 </div>

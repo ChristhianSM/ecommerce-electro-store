@@ -19,6 +19,8 @@ import { Modal } from "../components/ui/Modal";
 import { SearchScreem } from "../components/ecommerce/shop/SearchScreem";
 import { Footer } from "../components/ui/Footer";
 import PageNavigationListener from "../components/ui/PageNavigationListener";
+import { PrivateRoute } from "./PrivateRoute";
+import { PublicRoutes } from "./PublicRoutes";
 
 export const AppRoute = () => {
 
@@ -40,14 +42,22 @@ export const AppRoute = () => {
             <PageNavigationListener />
             <div className = "bg-white h-full overflow-hidden">
                 <Switch>
-                    <Route exact path = "/login" component = {LoginScreen}/>
-                    <Route exact path = "/register" component = {RegisterScreen}/>
-                    <Route exact path = "/perfil" component = {PerfilScreen}/>
-                    <Route  exact path = "/" component = {HomeScreen}/>
-                    <Route  exact path = "/shoppingCart" component = {ShoppingCartScreen}/>
-                    <Route  exact path = "/products/:category" component = {ContainerProductCategory}/>
-                    <Route  exact path = "/products/:category/:id" component = {ProductScreen}/>
-                    <Route  exact path = "/search/:query" component = {SearchScreem}/>
+                    <Route exact path = "/" component = {HomeScreen}/>
+                    <Route exact path = "/products/:category" component = {ContainerProductCategory}/>
+                    <Route exact path = "/products/:category/:id" component = {ProductScreen}/>
+                    <Route exact path = "/search/:query" component = {SearchScreem}/>
+                    <Route path =  "/auth">
+                        <PublicRoutes>
+                            <Route exact path = "/auth/login" component = {LoginScreen}/>
+                            <Route exact path = "/auth/register" component = {RegisterScreen}/>
+                        </PublicRoutes>
+                    </Route>
+                    <Route path = "/*">
+                        <PrivateRoute>
+                            <Route exact path = "/shoppingCart" component = {ShoppingCartScreen}/>
+                            <Route exact path = "/perfil" component = {PerfilScreen}/>
+                        </PrivateRoute>
+                    </Route>
                     <Redirect to = "/"/>
                 </Switch>
             </div>

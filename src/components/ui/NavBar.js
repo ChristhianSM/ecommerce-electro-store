@@ -69,13 +69,13 @@ export const NavBar = () => {
                         </div>)
                         :
                         <div className="login flex items-center">
-                            <Link to = "/login"> 
+                            <Link to = "/auth/login"> 
                                 <div className="flex items-center mr-5 ">
                                     <BiUser className = "text-2xl"></BiUser>
                                         <p className = "m-2">Inicia sesión</p>
                                 </div>
                             </Link>
-                            <Link to = "/register"> 
+                            <Link to = "/auth/register"> 
                                 <div className="flex items-center mr-5">
                                     <IoCreateOutline className = "text-2xl"></IoCreateOutline>
                                     <p className = "m-2">Crear cuenta</p>

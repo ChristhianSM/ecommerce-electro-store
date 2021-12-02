@@ -5,11 +5,14 @@ import {IoTicketOutline} from 'react-icons/io5'
 import PaymentContext from '../../../context/payment/PaymentContext';
 import { SpinnerCircularFixed } from 'spinners-react';
 import { ShoppingCartProduct } from './ShoppingCartProduct';
+import ProductContext from '../../../context/product/ProductContext';
 
 export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setStateComponent }) => {
     
     // State de la aplicacion
     const {state:statePayment, applyCouponDiscount, resetPayment} = useContext(PaymentContext);
+    const {state:stateProduct,clearShoppingCart} = useContext(ProductContext);
+    console.log(stateProduct.shoppingCart.length);
 
     useEffect(() => {
         resetPayment();
@@ -84,13 +87,23 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                         </div>
                     </div> 
                 }
-
-                <Link to = "/">
-                    <button className="flex font-semibold text-indigo-600 text-sm mt-5 items-center">
-                        <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
-                        Continuar Comprando
-                    </button>
-                </Link>
+                <div className = "flex justify-between mt-5">
+                    <Link to = "/">
+                        <button className="flex font-semibold text-indigo-600 text-sm  items-center">
+                            <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
+                            Continuar Comprando
+                        </button>
+                    </Link>
+                    {
+                        stateProduct.shoppingCart.length > 0 &&
+                        <button 
+                            className="flex font-semibold text-indigo-600 text-sm  items-center"
+                            onClick = { clearShoppingCart}
+                        >
+                                Vaciar Carrito de compras
+                        </button>
+                    }
+                </div>
             </div>
 
             <div id="summary" className="w-1/4 px-8 py-10 bg-gray-100">
@@ -143,7 +156,7 @@ export const ShoppingCart = ({shoppingCart, statePasos, setStatePasos , setState
                             : <span>S/. {statePayment.subtotal.toFixed(2)}</span>
                         }
                     </div>
-
+                    
                     <button 
                         className={`bg-purple-500 font-semibold hover:bg-purple-600 py-3 text-sm text-white uppercase w-full rounded-lg ${statePayment.loading && 'bg-gray-500 cursor-not-allowed'}`}
                         disabled = {statePayment.loading}

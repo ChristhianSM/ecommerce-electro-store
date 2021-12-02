@@ -74,24 +74,24 @@ export const RegisterScreen = () => {
             <NavBarAuth />
                 <div className="max-w-sm mx-auto rounded shadow-lg md:max-w-md my-10 p-6 pb-10 bg-gray-100 animate__animated animate__fadeInRight">
                     <div className=" flex justify-center border-b border-gray-300">
-                        <h1 className="font-bold text-lg text-gray-400 pb-1">Register</h1>
+                        <h1 className="font-bold text-lg text-gray-400 pb-1">Registro</h1>
                     </div>
                     <div className=" pt-6">
                         <form className=" text-center" onSubmit = {handleSubmitForm}> 
                             <Input 
                                 type = "text"
                                 name = "name"
-                                placeholder = "Name*"
-                                leyendaError = "El Name debe ser de 4 a 16 letras y solo puede contener letras"
+                                placeholder = "Nombre*"
+                                leyendaError = "El Nombre debe ser de 4 a 16 letras y solo puede contener letras"
                                 expresionRegular = {expresiones.nombre}
                                 state = {nameInput}
                                 changeState = {setNameInput}
                             />
                             <Input 
                                 type = "text"
-                                name = "lastName"
-                                placeholder = "Last Name"
-                                leyendaError = "El Last Name debe ser de 4 a 16 letras y solo puede contener letras"
+                                name = "Apellido"
+                                placeholder = "Apellidos"
+                                leyendaError = "Los apellidos debe ser de 4 a 16 letras y solo puede contener letras"
                                 expresionRegular = {expresiones.nombre}
                                 state = {lastNameInput}
                                 changeState = {setlastNameInput}
@@ -108,7 +108,7 @@ export const RegisterScreen = () => {
                             <Input 
                                 type = "password"
                                 name = "password"
-                                placeholder = "Password*"
+                                placeholder = "Contraseña*"
                                 expresionRegular = {expresiones.password}
                                 leyendaError = "La contraseña debe contener al menos 6 caracteres"
                                 state = {passwordInput}
@@ -117,7 +117,7 @@ export const RegisterScreen = () => {
                             <Input 
                                 type = "password"
                                 name = "confirmPassword"
-                                placeholder = "Confirm Password*"
+                                placeholder = "Confirma tu contraseña*"
                                 state = {confirmPasswordInput}
                                 changeState = {setconfirmPasswordInput}
                                 leyendaError = "Las contraseñas deben ser iguales"
@@ -128,7 +128,7 @@ export const RegisterScreen = () => {
                                 type="submit" 
                                 className={`w-full h-9 text-sm  bg-purple-500 font-semibold mt-2 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative ${state.loading && "cursor-not-allowed bg-gray-500"} }`}
                             >
-                                Create Account
+                                Crear Cuenta
                                 <SpinnerDotted 
                                     className = "absolute top-2 right-3 w-full" 
                                     size={20} thickness={143} speed={101} color="rgba(255, 255, 255, 1)"
@@ -139,13 +139,13 @@ export const RegisterScreen = () => {
                     </div>
 
                     <div className="pt-3 text-center"> 
-                        <span className="text-gray-600 text-xs w-2/3">Already have an account? 
-                            <Link to = "/login">
+                        <span className="text-gray-600 text-xs w-2/3">Ya tienes una cuenta? 
+                            <Link to = "/auth/login">
                                 <span 
                                     type="button" 
                                     className="text-gray-700 text-xs font-bold"
                                 > 
-                                    Login
+                                    Inicia Sesión
                                 </span>
                             </Link> 
                         </span> 

@@ -60,7 +60,7 @@ export const LoginScreen = () => {
                                     type="email" 
                                     name="email" 
                                     className= { !touched.email || !errors.email ? "block border p-2 bg-white w-full h-10 focus:outline-none focus:border-blue-400 rounded text-sm placeholder-gray-600 placeholder-opacity-40 text-gray-600" : "block border border-red-500 p-2 bg-white w-full h-10 focus:outline-none focus:border-red-400 rounded text-sm placeholder-gray-600 placeholder-opacity-40 text-gray-600"}
-                                    placeholder="Email or User*"
+                                    placeholder="Ingrese su email *"
                                     value = {values.email}
                                     onChange = {handleChange}
                                     onBlur = {handleBlur}
@@ -77,7 +77,7 @@ export const LoginScreen = () => {
                                 type="password"
                                 name="password"
                                 className={!touched.password || !errors.password ? "mt-2 block border p-2 bg-white w-full h-10 focus:outline-none focus:border-blue-400 rounded text-sm placeholder-gray-600 placeholder-opacity-40 text-gray-600" : "mt-2 block border border-red-500 p-2 bg-white w-full h-10 focus:outline-none focus:border-red-400 rounded text-sm placeholder-gray-600 placeholder-opacity-40 text-gray-600"}
-                                placeholder = "Password"
+                                placeholder = "Ingrese su contraseña *"
                                 value = {values.password}
                                 onChange = {handleChange}
                                 onBlur = {handleBlur}
@@ -93,7 +93,7 @@ export const LoginScreen = () => {
                             type="submit"
                             className={`w-full h-9 bg-purple-500 text-sm font-semibold mt-5 rounded-sm text-gray-100 focus:outline-none hover:bg-purple-600 relative ${state.loading && "cursor-not-allowed bg-gray-500"}`}
                             >
-                            Login
+                            Iniciar Sesión
                             <SpinnerDotted 
                                 className = "absolute top-2 right-3 w-full" 
                                 size={20} thickness={143} speed={101} color="rgba(255, 255, 255, 1)" 
@@ -105,22 +105,22 @@ export const LoginScreen = () => {
                     </Formik>
                 <div className="pt-3 text-center">
                     <span className="text-gray-600 text-xs w-2/3">
-                        You do not have an account?
-                        <Link to="/register">
+                        Aun no tienes una cuenta? 
+                        <Link to="/auth/register">
                         <span type="button" className="text-gray-700 text-xs font-bold">
-                            {" "}
-                            register here
+                            {"   "}
+                            Registrate aquí
                         </span>
                         </Link>
                     </span>
                     </div>
                     <div className="flex justify-between items-center mt-1">
                     <hr className="w-full border-gray-300" />{" "}
-                    <span className="p-2 text-gray-400 text-xs">OR</span>
+                    <span className="p-2 text-gray-400 text-xs">o</span>
                     <hr className="w-full border-gray-300" />
                 </div>
                 <div className="pt-2">
-                    <p className="text-gray-700 font-bold pb-2 pl-1">You can also login with:</p>
+                    <p className="text-gray-700 font-bold pb-2 pl-1">Tambien puedes iniciar sesión con:</p>
                     <div className="flex justify-between items-center"> 
                         <button 
                             type="button" 

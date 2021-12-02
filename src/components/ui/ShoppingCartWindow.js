@@ -33,7 +33,7 @@ export const ShoppingCartWindow = ({setModal, modal}) => {
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    history.push("/login")
+                    history.push("auth/login")
                 }
               })    
         }else{
