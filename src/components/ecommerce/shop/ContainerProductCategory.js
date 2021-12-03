@@ -23,6 +23,10 @@ export const ContainerProductCategory = () => {
 
         // Cuando carga el componente con una nueva categoria, traemos las marcas de dicha categoria
         const getMarcasFirebase = async () => {
+            setPrices({
+                higherPrice :0,
+                lowerPrice: 0
+            }) 
             const [marc, higherPrice, lowerPrice] = await getMarcas("PRODUCTS", {
                 key: "type",
                 condition : "==",

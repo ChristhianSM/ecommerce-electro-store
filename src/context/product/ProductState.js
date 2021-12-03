@@ -163,7 +163,6 @@ const ProductState = ({children}) => {
 
     // Obtener productos de acuerdo a un rango de precio
     const getProductsForRange = async (min, max, category) => {
-
         if (state.search) {
             const data = await getDocuments("PRODUCTS");
     

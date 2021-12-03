@@ -21,6 +21,10 @@ export const SearchScreem = () => {
 
     useEffect(() => {
         deleteFilter();
+        setPrices({
+            higherPrice :0,
+            lowerPrice: 0
+        }) 
         // Cuando carga el componente por una nueva busqueda en el parametro, traemos las marcas de dicha busqueda
         const getMarcasFirebase = async () => {
             const [marcas, categories, , higherPrice, lowerPrice] = await getMarcasForSearch(params.query);
