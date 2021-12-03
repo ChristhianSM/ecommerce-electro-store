@@ -4,7 +4,7 @@ Coder House : Proyecto Final React
 
 Tienda virtual, donde podras encontrar productos electronicos como : computadoras, celulares, tablets y accesorios electronicos.
 
-Que puedo hacer en ElectroStore :
+## Que puedo hacer en ElectroStore :
 
 * Registrarme tanto por email, google y Facebook.
 * Puedo gestionar mi cuenta : Actualizar mis datos personales, cambiar la contraseña de mi cuenta, si es que me he registrado por la misma tienda virtual, si me he registrado por Google o por Facebook, esa opcion no aparece en mi perfil.
@@ -23,28 +23,36 @@ Que puedo hacer en ElectroStore :
 * React Hooks : useState, useEffect, useParams.
 * React Router Dom
 * Context Api
+* Firebase
 
 ## Librerias usadas
 
-- [react-icons 4.3.1] - Iconos.
-- [react-router-dom 5.3.0] - Navegacion del ecommerce.
-- [spinners-react 1.0.6] - Spinner para loading.
-- [swiper 6.8.4] - Swipper.
-- [animate.css 4.1.1] - Animaciones.
-- [dayjs 1.10.7] - Formateo de Fechas.
-- [firebase 9.1.3] - Base de datos.
-- [formik 2.2.9] - Formularios
-- [react-loading-skeleton 3.0.1] - Loading para productos
-- [react-range 1.8.6] - Range para precios
-- [sweetalert2 11.1.9] - Alertas
-- [yup 0.32.11] - Validaciones.
+| Libreria | Descripcion |
+| ------ | ------ |
+| react-icons 4.3.1 | Iconos |
+| react-router-dom 5.3.0 | Navegacion del ecommerce. |
+| spinners-react 1.0.6 | Spinner para loading. |
+| swiper 6.8.4 | Swipper. |
+| animate.css 4.1.1 | Animaciones. |
+| dayjs 1.10.7 | Formateo de Fechas. |
+| firebase 9.1.3 | Base de datos. |
+| formik 2.2.9 | Formularios. |
+| react-loading-skeleton 3.0.1 | Loading para productos. |
+| react-range 1.8.6 | Range para precios. |
+| sweetalert2 11.1.9 | Alertas. |
+| yup 0.32.11 | Validaciones. |
 
 ## Demo: 
 
 <div align="center" style="margin-bottom:30px">
-  <img src="https://github.com/ChristhianSM/ecommerce-react-app/blob/main/src/assets/images/imagen1.JPG" width="400" title="hover text">
-  <img src="https://github.com/ChristhianSM/ecommerce-react-app/blob/main/src/assets/images/imagen2.JPG" width="400" title="hover text">
-  <img src="https://github.com/ChristhianSM/ecommerce-react-app/blob/main/src/assets/images/imagen3.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/login.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/perfil.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/home.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/descProduct.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/categories.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/shopping-cart.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/payment.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-electro-store/blob/main/src/assets/demo/form-shopping.JPG" width="400" title="hover text">
 </div>
 
 
