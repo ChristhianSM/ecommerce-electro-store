@@ -19,10 +19,6 @@ export const RegisterScreen = () => {
         campo : '',
         valid : true,
     })
-    const [lastNameInput, setlastNameInput] = useState({
-        campo : '',
-        valid : true,
-    })
 
     const [emailInput, setEmailInput] = useState({
         campo : '',

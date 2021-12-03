@@ -11,7 +11,7 @@ export const RangePrices = ({prices, category}) => {
     const STEP = 1;
     const MIN = prices.lowerPrice;
     const MAX = prices.higherPrice;
-    const [values, setValues] = useState([MIN, MAX]);
+    const [values, setValues] = useState([prices.lowerPrice, prices.higherPrice]);
 
     return (
         <div className = "mt-5">

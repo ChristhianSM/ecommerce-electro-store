@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Ecommerce : ElectroStore  :department_store:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Coder House : Proyecto Final React 
 
-## Available Scripts
+Tienda virtual, donde podras encontrar productos electronicos como : computadoras, celulares, tablets y accesorios electronicos.
 
-In the project directory, you can run:
+Que puedo hacer en ElectroStore :
 
-### `npm start`
+* Registrarme tanto por email, google y Facebook.
+* Puedo gestionar mi cuenta : Actualizar mis datos personales, cambiar la contraseña de mi cuenta, si es que me he registrado por la misma tienda virtual, si me he registrado por Google o por Facebook, esa opcion no aparece en mi perfil.
+* En mi perfil, puedo visualizar mis productos añadidos en favoritos, ver las ordenes que he realizado. 
+* Aplicar codigos de descuentos, cuando realizo mi compra, puedo aplicar el codigo de descuento "HOLA", el descuento aplicado es del 10% del total de la compra.
+* Agregar, eliminar y actualizar cantidad de productos al carrito de compras.
+* Agregar y eliminar productos a mi lista de favoritos.
+* Visualizar la descripcion del producto, mostrando diferentes imagenes del mismo producto, mostrando productos similares y mostrando sus caracteristicas en una tabla.
+* Busqueda de productos por Palabra
+* Busqueda de productos por categoria (Celulares, tablets, Computadoras, accesorios).
+* Filtrado de productos por marca y por precio. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Temas aprendidos
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* React
+* React Hooks : useState, useEffect, useParams.
+* React Router Dom
+* Context Api
 
-### `npm test`
+## Librerias usadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [react-icons 4.3.1] - Iconos.
+- [react-router-dom 5.3.0] - Navegacion del ecommerce.
+- [spinners-react 1.0.6] - Spinner para loading.
+- [swiper 6.8.4] - Swipper.
+- [animate.css 4.1.1] - Animaciones.
+- [dayjs 1.10.7] - Formateo de Fechas.
+- [firebase 9.1.3] - Base de datos.
+- [formik 2.2.9] - Formularios
+- [react-loading-skeleton 3.0.1] - Loading para productos
+- [react-range 1.8.6] - Range para precios
+- [sweetalert2 11.1.9] - Alertas
+- [yup 0.32.11] - Validaciones.
 
-### `npm run build`
+## Demo: 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<div align="center" style="margin-bottom:30px">
+  <img src="https://github.com/ChristhianSM/ecommerce-react-app/blob/main/src/assets/images/imagen1.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-react-app/blob/main/src/assets/images/imagen2.JPG" width="400" title="hover text">
+  <img src="https://github.com/ChristhianSM/ecommerce-react-app/blob/main/src/assets/images/imagen3.JPG" width="400" title="hover text">
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Instalacion 
 
-### `npm run eject`
+Para desarollo, clone el archivo, instale las dependencias y corra el servidor
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+git clone https://github.com/ChristhianSM/ecommerce-electro-store.git
+cd ecommerce-electro-store
+npm i
+npm run start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### LICENCIA
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Licencia MIT Copyright (c) 2021, Christhian Silupú Moscol.
